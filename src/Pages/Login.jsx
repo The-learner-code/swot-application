@@ -42,7 +42,7 @@ const Login = () => {
         if (email === "vrms@gmail.com") {
           navigate('/AdminDashboard');
         } else { 
-          navigate('/UserDashboard'); 
+          navigate('/Features'); 
         }
       }, 2000);
     } catch (error) {

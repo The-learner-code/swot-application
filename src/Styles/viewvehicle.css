@@ -1,0 +1,49 @@
+.ViewVehicle {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.ViewVehiclecontainer {
+    flex: 6;
+}
+
+.Block {
+    margin: 10px;
+}
+
+/* Add styles for the vehicle grid and blocks */
+.vehicle-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.vehicle-block:hover {
+    background-color: rgba(60, 0, 160, 0.4);
+}
+
+.vehicle-block {
+    width: calc(33.33% - 10px);
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-block img {
+    width: 385px;
+    height: 200px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+p {
+    padding-top: 5px;
+    font-size: 14px;
+}

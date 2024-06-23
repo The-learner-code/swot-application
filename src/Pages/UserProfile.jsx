@@ -1,0 +1,141 @@
+import React, { useState, useEffect } from 'react';
+import { auth, db, storage } from '../firebase';
+import { doc, setDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import '../Styles/userprofile.css';
+import Sidebar from '../Components/Sidebar/User_Sidebar';
+import Navbar from '../Components/Header/Navbar';
+import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const UserProfile = () => {
+  const [vehicleType, setVehicleType] = useState('');
+  const [vehicleNumber, setVehicleNumber] = useState('');
+  const [seatingSize, setSeatingSize] = useState('');
+  const [availableFrom, setAvailableFrom] = useState('');
+  const [availableTo, setAvailableTo] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [pdfFile, setPdfFile] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleImageUpload = async () => {
+    if (!imageFile) return null;
+    const storageRef = ref(storage, `user_photos/${currentUser.uid}/${imageFile.name}`);
+    await uploadBytes(storageRef, imageFile);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  };
+
+  const handleDocUpload = async () => {
+    if (!pdfFile) return null;
+    const storageRef = ref(storage, `user_resumes/${currentUser.uid}/${pdfFile.name}`);
+    await uploadBytes(storageRef, pdfFile);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!currentUser) {
+      toast.error('User not logged in.');
+      return;
+    }
+
+    const { email } = currentUser;
+
+
+    try {
+      // Upload image and document to Storage concurrently
+      const [imageUrl, pdfUrl] = await Promise.all([
+        handleImageUpload(),
+        handleDocUpload()
+      ]);
+
+      // Save form data and URLs to Firestore
+      await setDoc(doc(db, 'VehicleDetails', vehicleNumber), {
+        email,
+        vehicleType,
+        vehicleNumber,
+        seatingSize,
+        availableFrom,
+        availableTo,
+        imageUrl,
+        pdfUrl,
+        status:'Available',
+      }, { merge: true });
+
+      // Clear form after submission
+      setVehicleType('');
+      setVehicleNumber('');
+      setSeatingSize('');
+      setAvailableFrom('');
+      setAvailableTo('');
+      setImageFile(null);
+      setPdfFile(null);
+
+      toast.success('Details updated successfully!');
+    } catch (error) {
+      console.error('Error updating details: ', error);
+      toast.error('Error updating details. Please try again later.');
+    }
+  };
+
+  return (
+    <div className='UserProfile'>
+      <Sidebar />
+      <div className="UserProfilecontainer">
+        <Navbar />
+        <div className="form-container">
+          <form autoComplete='off' onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Vehicle Type</label>
+              <select value={vehicleType} onChange={(e) => setVehicleType(e.target.value)} required>
+                <option value="">Type</option>
+                <option value="Car">Car</option>
+                <option value="Bike">Bike</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Vehicle Number</label>
+              <input type="text" value={vehicleNumber} onChange={(e) => setVehicleNumber(e.target.value)} required />
+            </div>
+            <div className="form-group">
+              <label>Seating Size</label>
+              <input type="number" value={seatingSize} onChange={(e) => setSeatingSize(e.target.value)} required />
+            </div>
+            <div className="form-group">
+              <label>Available From</label>
+              <input type="date" value={availableFrom} onChange={(e) => setAvailableFrom(e.target.value)} required />
+            </div>
+            <div className="form-group">
+              <label>Available To</label>
+              <input type="date" value={availableTo} onChange={(e) => setAvailableTo(e.target.value)} required />
+            </div>
+            <div className="form-file">
+              <label htmlFor="file">Upload Image <DriveFolderUploadOutlinedIcon className="icon" /></label>
+              <input type="file" onChange={(e) => setImageFile(e.target.files[0])} accept="image/*" style={{ display: "none" }} id="file" />
+            </div>
+            <div className="form-file">
+              <label htmlFor="documents">Upload Documents <DriveFolderUploadOutlinedIcon className="icon" /></label>
+              <input type="file" onChange={(e) => setPdfFile(e.target.files[0])} accept=".pdf" style={{ display: "none" }} id="documents" />
+            </div>
+            <button type="submit">Update</button>
+          </form>
+        </div>
+      </div>
+      <ToastContainer />
+    </div>
+  );
+}
+
+export default UserProfile;

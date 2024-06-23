@@ -1,0 +1,67 @@
+.UserProfile {
+    display: flex;
+    width: 100%;
+}
+
+.UserProfilecontainer {
+    flex: 6;
+}
+
+.form-container {
+    padding-top: 50px;
+    padding-left: 30%;
+
+    .form-group {
+        margin-bottom: 15px;
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: medium;
+        }
+
+        input,
+        select {
+            max-width: 400px;
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+
+    }
+
+    .form-file{
+        margin-bottom: 10px;
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: medium;
+
+            .icon {
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    button[type="submit"] {
+        
+        padding: 10px 20px;
+        background: rgba(26, 35, 126, 0.8);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+}
