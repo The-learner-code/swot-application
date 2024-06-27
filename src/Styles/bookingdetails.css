@@ -1,0 +1,54 @@
+/* Styles for the BookingDetails page */
+.booking-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8; /* Light pastel background color */
+    margin: 0;
+  }
+  
+  .booking-container {
+    background-color: #ffffff; /* White background for the container */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .booking-container h1 {
+    color: #2c3e50; /* Dark navy blue for heading */
+    margin-bottom: 20px;
+  }
+  
+  .booking-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .booking-container label {
+    margin-bottom: 10px;
+    color: #34495e; /* Dark blue for labels */
+  }
+  
+  .booking-container input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .booking-container button {
+    background-color: #2980b9; /* Navy blue for the button */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .booking-container button:hover {
+    background-color: #1f639e; /* Darker navy blue on hover */
+  }
+  

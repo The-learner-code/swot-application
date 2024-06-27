@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { addDoc, doc, setDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import '../Styles/bookingdetails.css';
 
 const BookingDetails = () => {
   const location = useLocation();
@@ -38,7 +39,7 @@ const BookingDetails = () => {
     event.preventDefault();
     const startDate = new Date(event.target.elements.startDate.value);
     const endDate = new Date(event.target.elements.endDate.value);
-const email = currentUser.email;
+    const email = currentUser.email;
 
     if (checkAvailability(startDate, endDate)) {
       try {
@@ -68,21 +69,25 @@ const email = currentUser.email;
   };
 
   return (
-    <div>
-      <h1>Booking Details for {vehicle.vehicleType}</h1>
-      <form onSubmit={handleBooking}>
-        <label>
-          Start Date:
-          <input type="date" name="startDate" required />
-        </label>
-        <br />
-        <label>
-          End Date:
-          <input type="date" name="endDate" required />
-        </label>
-        <br />
-        <button type="submit">Check Availability</button>
-      </form>
+    <div className='booking-page'>
+      <div className="booking-container">
+
+
+        <h1>Booking Details for {vehicle.vehicleType}</h1>
+        <form onSubmit={handleBooking}>
+          <label>
+            Start Date:
+            <input type="date" name="startDate" required />
+          </label>
+          <br />
+          <label>
+            End Date:
+            <input type="date" name="endDate" required />
+          </label>
+          <br />
+          <button type="submit">Book</button>
+        </form>
+      </div>
     </div>
   );
 };
