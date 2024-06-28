@@ -8,6 +8,7 @@ import Navbar from '../Components/Header/Navbar';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
   const [vehicleType, setVehicleType] = useState('');
@@ -18,6 +19,7 @@ const UserProfile = () => {
   const [imageFile, setImageFile] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -53,7 +55,6 @@ const UserProfile = () => {
 
     const { email } = currentUser;
 
-
     try {
       // Upload image and document to Storage concurrently
       const [imageUrl, pdfUrl] = await Promise.all([
@@ -71,7 +72,7 @@ const UserProfile = () => {
         availableTo,
         imageUrl,
         pdfUrl,
-        status:'Available',
+        status: 'Available',
       }, { merge: true });
 
       // Clear form after submission
@@ -84,6 +85,12 @@ const UserProfile = () => {
       setPdfFile(null);
 
       toast.success('Details updated successfully!');
+      
+      // Delay before navigating to VehicleDetails page
+      setTimeout(() => {
+        navigate('/VehicleDetails');
+      }, 3000); // Adjust the delay as needed
+
     } catch (error) {
       console.error('Error updating details: ', error);
       toast.error('Error updating details. Please try again later.');

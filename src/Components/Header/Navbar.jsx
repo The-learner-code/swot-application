@@ -30,7 +30,7 @@ const Navbar = () => {
                         setName("Error fetching user data");
                     }
                 } else {
-                    setName("No user logged in");
+                    setName("VRMS - Admin");
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);

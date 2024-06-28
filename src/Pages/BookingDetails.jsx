@@ -37,21 +37,21 @@ const BookingDetails = () => {
 
   const handleBooking = async (event) => {
     event.preventDefault();
-    const startDate = new Date(event.target.elements.startDate.value);
-    const endDate = new Date(event.target.elements.endDate.value);
+    const startDate = event.target.elements.startDate.value;
+    const endDate = event.target.elements.endDate.value;
     const email = currentUser.email;
 
-    if (checkAvailability(startDate, endDate)) {
+    if (checkAvailability(new Date(startDate), new Date(endDate))) {
       try {
         const bookingRequestRef = doc(db, 'BookingRequests', email);
         await setDoc(bookingRequestRef, {
           vehicleNumber: vehicle.id,
           vehicleType: vehicle.vehicleType,
           seatingSize: vehicle.seatingSize,
-          startDate: startDate.toISOString(),
-          endDate: endDate.toISOString(),
+          startDate,
+          endDate,
           userEmail: email,
-          status: 'Pending',
+          status: 'Booked',
         });
 
         const vehicleRef = doc(db, 'VehicleDetails', vehicle.id);
@@ -68,11 +68,13 @@ const BookingDetails = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate('/ViewVehicle');
+  };
+
   return (
     <div className='booking-page'>
       <div className="booking-container">
-
-
         <h1>Booking Details for {vehicle.vehicleType}</h1>
         <form onSubmit={handleBooking}>
           <label>
@@ -86,6 +88,7 @@ const BookingDetails = () => {
           </label>
           <br />
           <button type="submit">Book</button>
+          <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
         </form>
       </div>
     </div>

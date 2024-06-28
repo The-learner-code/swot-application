@@ -34,17 +34,17 @@ const User_Sidebar = () => {
             <hr />
             <div className="center">
                 <ul>
-                    <li onClick={() => navigate('/UserProfile')}>
+                    <li onClick={() => navigate('/ListOfUser')}>
                         <GarageIcon className='icon' />
-                        <span>Update Vehicle</span>
+                        <span>List Of Users</span>
                     </li>
-                    <li onClick={() => navigate('/VehicleDetails')}>
+                    <li onClick={() => navigate('/ListOfVehicles')}>
                         <VisibilityIcon className='icon' />
-                        <span>Vehicle Details</span>
+                        <span>List Of Vehicles</span>
                     </li>
-                    <li onClick={() => navigate('/Features')}>
+                    <li onClick={() => navigate('/Request')}>
                         <ArrowBackIcon className='icon' />
-                        <span>Back to Suite</span>
+                        <span>Request Book</span>
                     </li>
                 </ul>
             </div>

@@ -23,33 +23,30 @@ const Login = () => {
     e.preventDefault();
 
     if (email === "vrms@gmail.com" && password === '123456') {
-      navigate('/AdminDashboard');
+      navigate('/ListOfUser');
     }
+    else {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
 
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+        // Update the lastSignInTime in AuthDetails collection
+        const authDetailsRef = doc(db, "AuthDetails", email);
+        await updateDoc(authDetailsRef, {
+          lastSignInTime: timestamp
+        });
 
-      // Update the lastSignInTime in AuthDetails collection
-      const authDetailsRef = doc(db, "AuthDetails", email);
-      await updateDoc(authDetailsRef, {
-        lastSignInTime: timestamp
-      });
-
-      toast.success("User logged in successfully");
-      setTimeout(() => {
-        if (email === "vrms@gmail.com") {
-          navigate('/AdminDashboard');
-        } else { 
-          navigate('/Features'); 
-        }
-      }, 2000);
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      toast.error(`Login Unsuccessful. Error code: ${errorCode}, Error message: ${errorMessage}`);
-      resetForm();
+        toast.success("User logged in successfully");
+        setTimeout(() => {
+          navigate('/Features');
+        }, 2000);
+      } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        toast.error(`Login Unsuccessful. Error code: ${errorCode}, Error message: ${errorMessage}`);
+        resetForm();
+      }
     }
   };
   return (

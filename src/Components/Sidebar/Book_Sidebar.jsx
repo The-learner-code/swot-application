@@ -17,7 +17,7 @@ const User_Sidebar = () => {
             await signOut(auth);
             toast.success("Logged out successfully!");
             setTimeout(() => {
-                navigate('/LoginAndRegister'); 
+                navigate('/Login'); 
             }, 2000);
         } catch (error) {
             console.error("Error logging out: ", error);
@@ -38,7 +38,7 @@ const User_Sidebar = () => {
                         <GarageIcon className='icon' />
                         <span>View Vehicle</span>
                     </li>
-                    <li onClick={() => navigate('/')}>
+                    <li onClick={() => navigate('/ViewBooking')}>
                         <VisibilityIcon className='icon' />
                         <span>View Booking</span>
                     </li>

@@ -19,7 +19,7 @@ const Navbar = () => {
                 <li><Link to='hero-lp' smooth={true} offset={0} duration={500}>Home</Link></li>
                 <li><Link to='aboutuslp' smooth={true} offset={-150} duration={500}>About us</Link></li>
                 <li onClick={() => navigate('/Login')}>Login</li>
-                <li><Link to='contactlp' smooth={true} offset={-260} duration={500}>Contact us</Link></li>
+                <li onClick={() => navigate('/Contact_Us')}>Contact Us</li>
             </ul>
         </nav>
     )

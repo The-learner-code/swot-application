@@ -16,7 +16,7 @@ const ViewVehicle = () => {
         const q = query(
           collection(db, 'VehicleDetails'),
           where('status', '==', 'Available'),
-          where('vehicleType', '==', 'Car')
+          //where('vehicleType', '==', 'Car')
         );
         const querySnapshot = await getDocs(q);
         const vehiclesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -43,6 +43,7 @@ const ViewVehicle = () => {
             {vehicles.map((vehicle, index) => (
               <div key={index} className='vehicle-block' onClick={() => handleVehicleClick(vehicle)}>
                 <img className='vehicle-img' src={vehicle.imageUrl} alt="Vehicle" />
+                <p>Type: {vehicle.vehicleType}</p>
                 <p>Seating Size: {vehicle.seatingSize}</p>
                 <p>Available From: {new Date(vehicle.availableFrom).toLocaleDateString()}</p>
                 <p>Available To: {new Date(vehicle.availableTo).toLocaleDateString()}</p>
