@@ -27,16 +27,18 @@ const StudentTable = () => {
   }, [currentEmail]);
 
   const columns = [
+    { field: 'timestamp', headerName: 'timestamp', width: 150 },
     { field: 'vehicleType', headerName: 'Vehicle Type', width: 150 },
+    { field: 'vehicleModel', headerName: 'Vehicle Model', width: 150 },
     { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 200 },
     { field: 'seatingSize', headerName: 'Seating Size', width: 150 },
     { field: 'startDate', headerName: 'From', width: 150 },
     { field: 'endDate', headerName: 'To', width: 150 },
-    { field: 'status', headerName: 'Status', width: 150},
+    { field: 'status', headerName: 'Status', width: 250},
   ];
 
   return (
-    <div className="table-bookingcontainer">
+    <div className="table-container">
       {loading ? <CircularProgress /> : (
         <div style={{ height: 580, width: '100%' }}>
           <DataGrid

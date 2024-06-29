@@ -10,6 +10,8 @@ import ViewVehicle from './Pages/ViewVehicle';
 import BookingDetailspage from './Pages/BookingDetails'
 import ViewBooking from './Pages/ViewBooking';
 import ListOfUser from './Pages/ListOfUser';
+import ListOfVehicle from './Pages/ListOfVehicle';
+import RequestCompletion from './Pages/RequestCompletion';
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
         <Route path='/BookingDetailspage' element={<BookingDetailspage />} />
         <Route path='/ViewBooking' element={<ViewBooking />} />
         <Route path='/ListOfUser' element={<ListOfUser />} />
+        <Route path='/ListOfVehicle' element={<ListOfVehicle />} />
+        <Route path='/RequestCompletion' element={<RequestCompletion />} />
       </Routes>
     </BrowserRouter>
   );

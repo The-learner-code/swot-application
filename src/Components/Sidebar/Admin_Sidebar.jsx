@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import GarageIcon from '@mui/icons-material/Garage';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 const User_Sidebar = () => {
     const navigate = useNavigate();
@@ -38,13 +38,13 @@ const User_Sidebar = () => {
                         <GarageIcon className='icon' />
                         <span>List Of Users</span>
                     </li>
-                    <li onClick={() => navigate('/ListOfVehicles')}>
+                    <li onClick={() => navigate('/ListOfVehicle')}>
                         <VisibilityIcon className='icon' />
                         <span>List Of Vehicles</span>
                     </li>
-                    <li onClick={() => navigate('/Request')}>
-                        <ArrowBackIcon className='icon' />
-                        <span>Request Book</span>
+                    <li onClick={() => navigate('/RequestCompletion')}>
+                        <EventAvailableIcon className='icon' />
+                        <span>Booking Conformation</span>
                     </li>
                 </ul>
             </div>

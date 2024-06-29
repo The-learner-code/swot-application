@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
+  const [vehicleModel, setVehicleModel] = useState('');
   const [vehicleType, setVehicleType] = useState('');
   const [vehicleNumber, setVehicleNumber] = useState('');
   const [seatingSize, setSeatingSize] = useState('');
@@ -66,6 +67,7 @@ const UserProfile = () => {
       await setDoc(doc(db, 'VehicleDetails', vehicleNumber), {
         email,
         vehicleType,
+        vehicleModel,
         vehicleNumber,
         seatingSize,
         availableFrom,
@@ -77,6 +79,7 @@ const UserProfile = () => {
 
       // Clear form after submission
       setVehicleType('');
+      setVehicleModel('');
       setVehicleNumber('');
       setSeatingSize('');
       setAvailableFrom('');
@@ -111,6 +114,10 @@ const UserProfile = () => {
                 <option value="Car">Car</option>
                 <option value="Bike">Bike</option>
               </select>
+            </div>
+            <div className="form-group">
+              <label>Vehicle Model</label>
+              <input type="text" value={vehicleModel} onChange={(e) => setVehicleModel(e.target.value)} required />
             </div>
             <div className="form-group">
               <label>Vehicle Number</label>

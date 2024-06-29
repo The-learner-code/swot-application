@@ -44,6 +44,7 @@ const ViewVehicle = () => {
               <div key={index} className='vehicle-block' onClick={() => handleVehicleClick(vehicle)}>
                 <img className='vehicle-img' src={vehicle.imageUrl} alt="Vehicle" />
                 <p>Type: {vehicle.vehicleType}</p>
+                <p>Model: {vehicle.vehicleModel}</p>
                 <p>Seating Size: {vehicle.seatingSize}</p>
                 <p>Available From: {new Date(vehicle.availableFrom).toLocaleDateString()}</p>
                 <p>Available To: {new Date(vehicle.availableTo).toLocaleDateString()}</p>

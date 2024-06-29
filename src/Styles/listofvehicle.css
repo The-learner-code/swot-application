@@ -1,0 +1,14 @@
+.ListOfVehicle {
+    display: flex;
+    width: 100%;
+}
+
+.ListOfVehiclecontainer {
+    flex: 6;
+}
+
+.table {
+    padding: 5px;
+    margin: 5px;
+    width: 1240px;
+}

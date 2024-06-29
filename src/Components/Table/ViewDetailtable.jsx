@@ -13,21 +13,22 @@ const StudentTable = () => {
   const currentEmail = auth.currentUser?.email;
 
   useEffect(() => {
-    const fetchStudents = async () => {
+    const fetchVehicles = async () => {
       if (currentEmail) {
         const q = query(collection(db, "VehicleDetails"), where("email", "==", currentEmail));
-        const VehicleSnapshot = await getDocs(q);
-        const VehicleList = VehicleSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setVehicle(VehicleList);
+        const vehicleSnapshot = await getDocs(q);
+        const vehicleList = vehicleSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setVehicle(vehicleList);
         setLoading(false);
       }
     };
 
-    fetchStudents();
+    fetchVehicles();
   }, [currentEmail]);
 
   const columns = [
     { field: 'vehicleType', headerName: 'Vehicle Type', width: 150 },
+    { field: 'vehicleModel', headerName: 'vehicleModel', width: 200 },
     { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 200 },
     { field: 'seatingSize', headerName: 'Seating Size', width: 150 },
     { field: 'availableFrom', headerName: 'Available From', width: 150 },

@@ -1,0 +1,14 @@
+.Request {
+    display: flex;
+    width: 100%;
+}
+
+.Requestcontainer {
+    flex: 6;
+}
+
+.table {
+    padding: 5px;
+    margin: 5px;
+    width: 1240px;
+}

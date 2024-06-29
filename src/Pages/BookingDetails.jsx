@@ -35,23 +35,31 @@ const BookingDetails = () => {
     return startDate >= availableFrom && endDate <= availableTo;
   };
 
+  const formatTimestamp = (date) => {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true, timeZone: 'Asia/Kolkata' };
+    return new Intl.DateTimeFormat('en-IN', options).format(date);
+  };
+
   const handleBooking = async (event) => {
     event.preventDefault();
     const startDate = event.target.elements.startDate.value;
     const endDate = event.target.elements.endDate.value;
     const email = currentUser.email;
+    const timestamp = formatTimestamp(new Date());
 
     if (checkAvailability(new Date(startDate), new Date(endDate))) {
       try {
-        const bookingRequestRef = doc(db, 'BookingRequests', email);
+        const bookingRequestRef = doc(db, 'BookingRequests', vehicle.id);
         await setDoc(bookingRequestRef, {
           vehicleNumber: vehicle.id,
           vehicleType: vehicle.vehicleType,
+          vehicleModel : vehicle.vehicleModel,
           seatingSize: vehicle.seatingSize,
           startDate,
           endDate,
-          userEmail: email,
-          status: 'Booked',
+          userEmail : email,
+          status: 'Booked - Waiting Confirmation',
+          timestamp: timestamp.toString(), // Adding the timestamp
         });
 
         const vehicleRef = doc(db, 'VehicleDetails', vehicle.id);
