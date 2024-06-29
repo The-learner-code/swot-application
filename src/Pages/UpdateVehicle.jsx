@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import '../Styles/userprofile.css';
+import '../Styles/updatevehicle.css';
 import Sidebar from '../Components/Sidebar/User_Sidebar';
 import Navbar from '../Components/Header/Navbar';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
@@ -90,6 +90,8 @@ const UserProfile = () => {
       await updateDoc(doc(db, 'AuthDetails', email), {
         type: "Vehicle_Owner",
       });
+
+
 
       toast.success('Details updated successfully!');
 

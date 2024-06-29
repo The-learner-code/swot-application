@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from "../firebase";
-import { signInWithEmailAndPassword, } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { doc, updateDoc } from "firebase/firestore";
@@ -16,8 +16,6 @@ const Login = () => {
     setEmail("");
     setPassword("");
   };
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +48,27 @@ const Login = () => {
       }
     }
   };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault(); 
+    const trimmedEmail = email.trim(); 
+
+    if (!trimmedEmail) {
+      toast.error("Please enter your email address to reset password.", { autoClose: 2500 });
+      resetForm(); 
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, trimmedEmail); 
+      toast.success("Password reset email sent successfully.", { autoClose: 2500 });
+      resetForm(); 
+    } catch (error) {
+      toast.error(`Error sending password reset email: ${error.message}`, { autoClose: 2500 });
+      resetForm(); 
+    }
+  };
+
   return (
     <div className='Login-cotainer'>
       <ToastContainer position="top-left" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
@@ -66,7 +85,7 @@ const Login = () => {
             <div className='input-field'>
               <input type="password" className="login-input" placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
-            <p><button type="button" onClick={() => navigate('/PassReset')} className="btn_forget">Forgot Password</button></p>
+            <p><button type="button" className="btn_forget" onClick={handleForgotPassword} >Forgot Password</button></p>
             <div className='btn-field'>
               <button type="submit" className="btn-sub">Submit</button>
             </div>

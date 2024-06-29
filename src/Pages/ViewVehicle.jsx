@@ -13,13 +13,18 @@ const ViewVehicle = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const currentDate = new Date().toISOString().split('T')[0];
+        console.log('Current Date:', currentDate); // This will output the date in 'YYYY-MM-DD' format
+
         const q = query(
           collection(db, 'VehicleDetails'),
-          where('status', '==', 'Available'),
-          //where('vehicleType', '==', 'Car')
+          where('status', '==', 'Available')
+          //where('availableTo', '>', currentDate)
         );
+
         const querySnapshot = await getDocs(q);
         const vehiclesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log('Fetched Vehicles Data:', vehiclesData);
         setVehicles(vehiclesData);
       } catch (error) {
         console.error('Error fetching vehicle details:', error);

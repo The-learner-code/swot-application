@@ -29,7 +29,7 @@ const UserDashboard = () => {
             <div> <button className="btn-lo" onClick={handleLogout}>LogOut</button></div>
             <h1>Solution Suite </h1>
             <div className="row">
-                <div className="features" onClick={() => navigate('/UserProfile')}>
+                <div className="features" onClick={() => navigate('/UpdateVehicle')}>
                     <PersonIcon className="fa-icon" />
                     <h2>Add vehicle for rental</h2>
                     <p>Refresh your details in a snap!</p>
