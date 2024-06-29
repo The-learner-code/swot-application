@@ -1,19 +1,20 @@
-.Login-cotainer {
+.Login-cotainer,
+.Register-cotainer {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(60, 0, 160, 0.6), rgba(0, 128, 128, 0.5)), url('../Assets/LP-Image.jpg');
+  background: url('../Assets/lp.jpg');
   background-position: center;
   background-size: cover;
   position: relative;
 }
 
-.BackToHome .link-btn {
-  width: 130px;
-  height: 50px;
+.Back .link {
+  width: 120px;
+  height: 40px;
   position: absolute;
-  top: 30px;
-  right: 40px;
+  top: 20px;
+  right: 45px;
   font-size: 16px;
   font-weight: medium;
   background: #3c00a0;
@@ -22,10 +23,6 @@
   border: 0;
   outline: 0;
   cursor: pointer;
-}
-
-form p a {
-  text-decoration: none;
 }
 
 .form-box {
@@ -66,6 +63,7 @@ form p a {
   border-radius: 3px;
   display: flex;
   align-items: center;
+  border-radius: 5px;
 }
 
 input {
@@ -101,7 +99,7 @@ input {
   background: none;
   border: none;
   cursor: pointer;
-  padding-top: 10px;
+  padding-top: 5px;
   padding-left: 0%;
   padding-bottom: 10px;
   font-size: medium;

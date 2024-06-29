@@ -1,4 +1,3 @@
-import React from 'react';
 import '../Styles/listofuser.css';
 import Sidebar from '../Components/Sidebar/Admin_Sidebar';
 import Navbar from '../Components/Header/Navbar';

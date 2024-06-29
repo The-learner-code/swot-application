@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, updateDoc, doc, query, where } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { db } from "../../firebase";
 import { DataGrid } from '@mui/x-data-grid';
 import { CircularProgress, Button } from '@mui/material';
 import './table.css';
 
-const StudentTable = () => {
+const BookingRequest = () => {
   const [booking, setBooking] = useState([]);
   const [loading, setLoading] = useState(true);
-  const auth = getAuth();
 
   useEffect(() => {
-    const fetchStudents = async () => {
+    const fetchBookingRequest = async () => {
       const q = collection(db, "BookingRequests");
       const BookingSnapshot = await getDocs(q);
       const BookingList = BookingSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -20,7 +18,7 @@ const StudentTable = () => {
       setLoading(false);
     };
 
-    fetchStudents();
+    fetchBookingRequest();
   }, []);
 
   const updateStatus = async (id, status) => {
@@ -53,18 +51,19 @@ const StudentTable = () => {
   };
 
   const columns = [
-    { field: 'timestamp', headerName: 'timestamp', width: 250 },
-    { field: 'userEmail', headerName: 'userEmail', width: 200 },
-    { field: 'vehicleType', headerName: 'Vehicle Type', width: 100 },
-    { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 120 },
-    { field: 'seatingSize', headerName: 'Seating Size', width: 100 },
-    { field: 'startDate', headerName: 'From', width: 100 },
-    { field: 'endDate', headerName: 'To', width: 100 },
-    { field: 'status', headerName: 'Status', width: 250 },
+    { field: 'timestamp', headerName: 'timestamp', width: 250, headerClassName: 'table-header' },
+    { field: 'userEmail', headerName: 'userEmail', width: 200, headerClassName: 'table-header' },
+    { field: 'vehicleType', headerName: 'Vehicle Type', width: 100, headerClassName: 'table-header' },
+    { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 120, headerClassName: 'table-header' },
+    { field: 'seatingSize', headerName: 'Seating Size', width: 100, headerClassName: 'table-header' },
+    { field: 'startDate', headerName: 'From', width: 100, headerClassName: 'table-header' },
+    { field: 'endDate', headerName: 'To', width: 100, headerClassName: 'table-header' },
+    { field: 'status', headerName: 'Status', width: 250, headerClassName: 'table-header' },
     {
       field: 'confirm',
       headerName: 'Confirm',
       width: 150,
+      headerClassName: 'table-header',
       renderCell: (params) => (
         <Button
           variant="contained"
@@ -80,6 +79,7 @@ const StudentTable = () => {
       field: 'decline',
       headerName: 'Decline',
       width: 150,
+      headerClassName: 'table-header',
       renderCell: (params) => (
         <Button
           variant="contained"
@@ -100,8 +100,12 @@ const StudentTable = () => {
           <DataGrid
             rows={booking}
             columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10, 20, 30]}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+            }}
+            pageSizeOptions={[5, 10, 20]}
           />
         </div>
       )}
@@ -109,4 +113,4 @@ const StudentTable = () => {
   );
 }
 
-export default StudentTable;
+export default BookingRequest;

@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword, } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { doc, updateDoc } from "firebase/firestore";
-import '../Styles/login.css';
+import '../Styles/loginandregister.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +28,7 @@ const Login = () => {
     else {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+        console.log(userCredential);
         const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
 
         // Update the lastSignInTime in AuthDetails collection
@@ -41,6 +41,7 @@ const Login = () => {
         setTimeout(() => {
           navigate('/Features');
         }, 2000);
+        resetForm();
       } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -52,8 +53,8 @@ const Login = () => {
   return (
     <div className='Login-cotainer'>
       <ToastContainer position="top-left" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-      <div className="BackToHome">
-        <button onClick={() => navigate('/')} className="link-btn">Back to Home</button>
+      <div className="Back">
+        <button onClick={() => navigate('/')} className="link">Back to Home</button>
       </div>
       <div className="form-box">
         <h1>Login...!</h1>

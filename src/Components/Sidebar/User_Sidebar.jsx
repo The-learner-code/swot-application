@@ -17,7 +17,7 @@ const User_Sidebar = () => {
             await signOut(auth);
             toast.success("Logged out successfully!");
             setTimeout(() => {
-                navigate('/Login'); 
+                navigate('/Login');
             }, 2000);
         } catch (error) {
             console.error("Error logging out: ", error);
@@ -27,7 +27,7 @@ const User_Sidebar = () => {
 
     return (
         <div className="sidebar">
-           <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+            <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className="top">
                 <span className="logo">Rent Ease</span>
             </div>

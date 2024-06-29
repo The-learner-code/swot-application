@@ -1,11 +1,10 @@
 import React from 'react'
 import '../Styles/Home.css'
 
-const Title = ({subtitle, title}) => {
+const Title = ({title}) => {
   return (
     <div className='title'>
-        <p>{subtitle}</p>
-        <h2>{title}</h2>
+        <h1>{title}</h1>
     </div>
   )
 }

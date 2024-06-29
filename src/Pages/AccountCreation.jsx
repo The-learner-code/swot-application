@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { auth, db } from '../firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../Styles/register.css';
+import '../Styles/loginandregister.css';
 
 const AccountCreation = () => {
     const [email, setEmail] = useState("");
@@ -74,7 +74,6 @@ const AccountCreation = () => {
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
-            const user = userCredential.user;
             const authDetailsRef = doc(db, "AuthDetails", email);
             const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
             const userType = email === "vrms@gmail.com" ? "Admin" : "User";
@@ -94,6 +93,7 @@ const AccountCreation = () => {
             setTimeout(() => {
                 navigate('/Login');
             }, 3000); // Delay of 3 seconds
+            resetForm();
         } catch (error) {
             toast.error(`Registration Unsuccessful. Error code: ${error.message}`);
             console.log(error);
@@ -104,11 +104,11 @@ const AccountCreation = () => {
     return (
         <div className='Register-cotainer'>
             <ToastContainer position="top-left" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-            <div className="BackToHome">
-                <button onClick={() => navigate('/')} className="link-btn">Back to Home</button>
+            <div className="Back">
+                <button onClick={() => navigate('/')} className="link">Back to Home</button>
             </div>
             <div className="form-box">
-                <h1>Register Form...!</h1>
+                <h1>Enroll Your Detail...!</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <div className='input-field'>

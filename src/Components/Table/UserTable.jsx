@@ -5,13 +5,15 @@ import { DataGrid } from '@mui/x-data-grid';
 import { CircularProgress } from '@mui/material';
 import './table.css';
 
-const StudentTable = () => {
+
+const UserTable = () => {
+
     const [userdetail, setUserdetail] = useState([]);
     const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
-        const fetchStudents = async () => {
+        const fetchUserTable = async () => {
 
             const q = query(collection(db, "AuthDetails"));
             const UserSnapshot = await getDocs(q);
@@ -21,17 +23,17 @@ const StudentTable = () => {
 
         };
 
-        fetchStudents();
+        fetchUserTable();
     }, []);
 
     const columns = [
-        { field: 'Name', headerName: 'Name', width: 150 },
-        { field: 'Email_id', headerName: 'Email_id', width: 200 },
-        { field: 'createdAt', headerName: 'Created Date', width: 200 },
-        { field: 'lastSignInTime', headerName: 'Last Signed In', width: 200 },
-        { field: 'Address', headerName: 'Address', width: 250 },
-        { field: 'State', headerName: 'State', width: 150 },
-        { field: 'Phone_Number', headerName: 'Phone_Number', width: 150 },
+        { field: 'Name', headerName: 'Name', width: 150, headerClassName: 'table-header' },
+        { field: 'Email_id', headerName: 'Email_id', width: 200, headerClassName: 'table-header' },
+        { field: 'createdAt', headerName: 'Created Date', width: 200, headerClassName: 'table-header' },
+        { field: 'lastSignInTime', headerName: 'Last Signed In', width: 200, headerClassName: 'table-header' },
+        { field: 'Address', headerName: 'Address', width: 250, headerClassName: 'table-header' },
+        { field: 'State', headerName: 'State', width: 150, headerClassName: 'table-header' },
+        { field: 'Phone_Number', headerName: 'Phone_Number', width: 150, headerClassName: 'table-header' },
     ];
 
     return (
@@ -41,8 +43,12 @@ const StudentTable = () => {
                     <DataGrid
                         rows={userdetail}
                         columns={columns}
-                        pageSize={10}
-                        rowsPerPageOptions={[10, 20, 30]}
+                        initialState={{
+                            pagination: {
+                                paginationModel: { page: 0, pageSize: 10 },
+                            },
+                        }}
+                        pageSizeOptions={[5, 10, 20]}
                     />
                 </div>
             )}
@@ -50,4 +56,4 @@ const StudentTable = () => {
     );
 }
 
-export default StudentTable;
+export default UserTable;

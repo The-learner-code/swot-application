@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/Home.css';
 import image1 from '../Assets/image1.png';
-import image2 from '../Assets/image2.png';
 import image3 from '../Assets/image3.png';
+import image7 from '../Assets/image7.jpg';
+import image9 from '../Assets/image9.jpg';
 
 const Hero = () => {
     const navigate = useNavigate();
@@ -11,19 +12,20 @@ const Hero = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentImage((prevImage) => (prevImage + 1) % 3);
+            setCurrentImage((prevImage) => (prevImage + 1) % 4);
         }, 6000);
 
         return () => clearInterval(interval);
     }, []);
 
-    const images = [image1, image2, image3];
+    const images = [image1, image3, image7, image9];
 
     return (
-        <div className='hero-lp' style={{ backgroundImage: `url(${images[currentImage]})` }}>
-            <div className="hero-lp-text">
-            <h1>Your Journey, Our Wheels</h1>
-                <button className='btn' onClick={() => navigate('/Register')}>Register To Explore</button>
+        <div className='hero' style={{ backgroundImage: `url(${images[currentImage]})` }}>
+            <div className="hero-text">
+                <p>Your Journey,</p>
+                <p>Our Wheels</p>
+                <button className='reg-btn' onClick={() => navigate('/Register')}>Register To Ride</button>
             </div>
         </div>
     )
