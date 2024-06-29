@@ -1,28 +1,38 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { DataGrid } from '@mui/x-data-grid';
-import { CircularProgress, Link } from '@mui/material';
+import { CircularProgress, Link, Button } from '@mui/material';
 import './table.css';
 
 const VehicleTable = () => {
   const [vehicledetail, setVehicledetail] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     const fetchVehicle = async () => {
-
       const q = query(collection(db, "VehicleDetails"));
       const UserSnapshot = await getDocs(q);
       const UserList = UserSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setVehicledetail(UserList);
       setLoading(false);
-
     };
 
     fetchVehicle();
   }, []);
+
+  const handleRemove = async (id) => {
+    try {
+      await deleteDoc(doc(db, "VehicleDetails", id));
+      // Refresh data after deletion
+      const q = query(collection(db, "VehicleDetails"));
+      const UserSnapshot = await getDocs(q);
+      const UserList = UserSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setVehicledetail(UserList);
+    } catch (error) {
+      console.error("Error removing document: ", error);
+    }
+  };
 
   const columns = [
     { field: 'email', headerName: 'email', width: 150, headerClassName: 'table-header' },
@@ -54,6 +64,21 @@ const VehicleTable = () => {
         </Link>
       ),
     },
+    {
+      field: 'remove',
+      headerName: 'Remove',
+      headerClassName: 'table-header',
+      width: 150,
+      renderCell: (params) => (
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => handleRemove(params.row.id)}
+        >
+          Remove
+        </Button>
+      ),
+    },
   ];
 
   return (
@@ -63,11 +88,7 @@ const VehicleTable = () => {
           <DataGrid
             rows={vehicledetail}
             columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-            }}
+            pageSize={10} // You can set the default page size here
             pageSizeOptions={[5, 10, 20]}
           />
         </div>
