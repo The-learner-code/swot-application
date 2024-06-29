@@ -27,6 +27,7 @@ const UserTable = () => {
     }, []);
 
     const columns = [
+        { field: 'type', headerName: 'Type', width: 120, headerClassName: 'table-header' },
         { field: 'Name', headerName: 'Name', width: 150, headerClassName: 'table-header' },
         { field: 'Email_id', headerName: 'Email_id', width: 200, headerClassName: 'table-header' },
         { field: 'createdAt', headerName: 'Created Date', width: 200, headerClassName: 'table-header' },

@@ -21,11 +21,11 @@ const BookingRequest = () => {
     fetchBookingRequest();
   }, []);
 
-  const updateStatus = async (id, status) => {
+  const updateStatus = async (id, conform) => {
     const bookingRef = doc(db, "BookingRequests", id);
-    await updateDoc(bookingRef, { status: status });
+    await updateDoc(bookingRef, { status: conform });
 
-    setBooking(booking.map(item => item.id === id ? { ...item, status: status } : item));
+    setBooking(booking.map(item => item.id === id ? { ...item, status: conform } : item));
   };
 
   const updateVehicleStatus = async (vehicleNumber) => {

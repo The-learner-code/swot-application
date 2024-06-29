@@ -74,9 +74,10 @@ const AccountCreation = () => {
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
+            console.log(userCredential);
             const authDetailsRef = doc(db, "AuthDetails", email);
             const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-            const userType = email === "vrms@gmail.com" ? "Admin" : "User";
+            const userType = email === "vrms@gmail.com" ? "Admin" : "Vehicle_User";
 
             await setDoc(authDetailsRef, {
                 Name: fullName,

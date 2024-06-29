@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import '../Styles/userprofile.css';
 import Sidebar from '../Components/Sidebar/User_Sidebar';
@@ -87,8 +87,12 @@ const UserProfile = () => {
       setImageFile(null);
       setPdfFile(null);
 
+      await updateDoc(doc(db, 'AuthDetails', email), {
+        type: "Vehicle_Owner",
+      });
+
       toast.success('Details updated successfully!');
-      
+
       // Delay before navigating to VehicleDetails page
       setTimeout(() => {
         navigate('/VehicleDetails');
