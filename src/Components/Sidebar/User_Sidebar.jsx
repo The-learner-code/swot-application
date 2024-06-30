@@ -34,7 +34,7 @@ const User_Sidebar = () => {
             <hr />
             <div className="center">
                 <ul>
-                    <li onClick={() => navigate('/UserProfile')}>
+                    <li onClick={() => navigate('/UpdateVehicle')}>
                         <GarageIcon className='icon' />
                         <span>Update Vehicle</span>
                     </li>

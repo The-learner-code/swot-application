@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from "../firebase";
 import { signOut } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import PersonIcon from '@mui/icons-material/Person';
 import EditIcon from '@mui/icons-material/Edit';
-import '../Styles/features.css'
+import '../Styles/features.css';
 
 const UserDashboard = () => {
-
     const navigate = useNavigate();
+    const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 
     const handleLogout = async () => {
         try {
             await signOut(auth);
-            toast.success('logged Out successfully....!');
+            toast.success('Logged out successfully!');
             setTimeout(() => {
                 navigate('/');
             }, 3000); // Delay of 3 seconds
@@ -23,33 +23,63 @@ const UserDashboard = () => {
         }
     };
 
+    const closeWelcomeModal = () => {
+        setShowWelcomeModal(false);
+    };
+
     return (
         <div className="features-container">
+            {showWelcomeModal && (
+                <div className="welcome-modal">
+                    <h2>Terms and Conditions</h2>
+
+                    <h3>Vehicle Availability and Scheduling:</h3>
+                    <p>Owners must provide accurate availability schedules. Withdrawals require one week's notice.</p>
+
+                    <h3>Rental Rates:</h3>
+                    <ul>
+                    <p>Current rates:</p>
+                        <li>4-Seater Car: ₹1,000/day</li>
+                        <li>5-Seater Car: ₹1,200/day</li>
+                        <li>Bike: ₹500/day</li>
+                    </ul>
+
+                    <h3>Vehicle Condition and Maintenance:</h3>
+                    <p>Vehicles must be well-maintained and clean. Owners are responsible for timely repairs.</p>
+
+                    <h3>Documentation:</h3>
+                    <p>Upload and maintain registration, insurance, and PUC certificates.</p>
+
+                    <h3>Rental Agreement:</h3>
+                    <p>Agree to terms before booking, including rental period adherence.</p>
+
+                    <h3>Vehicle Condition:</h3>
+                    <p>Maintain vehicle condition during use and report damages promptly.</p>
+
+                    <h3>Damage and Penalties:</h3>
+                    <p>Users pay for damages incurred during use.</p>
+                    <button onClick={closeWelcomeModal}>Reed, Accept to continue...!</button>
+                </div>
+            )}
             <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div> <button className="btn-lo" onClick={handleLogout}>LogOut</button></div>
-            <h1>Solution Suite </h1>
-            <div className="row">
-                <div className="features" onClick={() => navigate('/UpdateVehicle')}>
-                    <PersonIcon className="fa-icon" />
-                    <h2>Add vehicle for rental</h2>
-                    <p>Refresh your details in a snap!</p>
+            <div className='feat-container'>
+                <h1>Solution Suite</h1>
+                <div className="row">
+                    <div className="features" onClick={() => navigate('/UpdateVehicle')}>
+                        <PersonIcon className="fa-icon" />
+                        <h2>Add vehicle for rental</h2>
+                        <p>Refresh your details in a snap!</p>
+                    </div>
+                    <div className="features" onClick={() => navigate('/ViewVehicle')}>
+                        <EditIcon className="fa-icon" />
+                        <h2>Move for Booking</h2>
+                        <p>See your profile, anytime, anywhere.</p>
+                    </div>
                 </div>
-                <div className="features" onClick={() => navigate('/ViewVehicle')}>
-                    <EditIcon className="fa-icon" />
-                    <h2>Move for Booking</h2>
-                    <p>See your profile, anytime, anywhere.</p>
-                </div>
-            </div>
-            <div className="guideline">
-                <strong>Guidelines must be followed...!</strong>
-                <p>Requests should be routed to the appropriate approver based on the user's department or role.</p>
-                <p>Approvers should receive notifications of new requests via email or system alerts.</p>
-                <p>Approvers can approve, reject, or request modifications to the vehicle request.</p>
-                <p>Once approved, the requester is notified, and the vehicle is reserved.</p>
             </div>
         </div>
     );
 };
-
 
 export default UserDashboard;

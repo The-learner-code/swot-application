@@ -86,11 +86,13 @@ nav ul li {
     padding-top: 8%;
     padding-left: 8%;
     color: #fff;
-    max-width: 800px; /* You can adjust the width as needed */
+    max-width: 800px;
+    /* You can adjust the width as needed */
 }
 
 .hero-text p {
-    margin: 10px 0; /* Add some margin for spacing between lines */
+    margin: 10px 0;
+    /* Add some margin for spacing between lines */
     font-size: 65px;
     font-weight: 100;
 }
@@ -176,7 +178,7 @@ nav ul li {
 }
 
 .title h1 {
-    color: #000f38;
+    color: #fff;
     font-size: 38px;
     font-weight: 600;
     text-transform: none;

@@ -3,7 +3,7 @@
     width: 100%;
     height: 100vh;
     padding: 0 8%;
-    background: linear-gradient(135deg, rgba(60, 0, 160, 0.6), rgba(0, 128, 128, 0.5)), url('../Assets/LP-Image.jpg');
+    background: linear-gradient(to bottom, rgba(40, 60, 80, 0.4), rgba(20, 20, 20, 0.4)), url('../Assets/mercedes-benz.jpg');
     background-position: center;
     background-size: cover;
 }
@@ -29,7 +29,7 @@
 
 .features-container h1 {
     text-align: center;
-    padding-top: 0.5%;
+    padding-top: 2.5%;
     margin-bottom: 60px;
     font-weight: 600;
     position: relative;
@@ -47,22 +47,37 @@
     transform: translateX(-50%);
 }
 
+.feat-container {
+    width: 900px;
+    height: 300px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border to mimic glass edge */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Subtle shadow */
+    border-radius: 10px; /* Optional: Rounded corners */
+    position: fixed; /* Fixed position */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for centering */
+}
+
 .row {
+
+    justify-content: space-evenly;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 160px;
+    grid-template-columns: repeat(auto-fit, minmax(10px, 300px));
+    grid-gap: 120px;
 }
 
 .features {
     text-align: center;
-    padding: 25px 10px;
+    padding: 15px 5px;
     border-radius: 10px;
     font-size: 14px;
     cursor: pointer;
     background: #eaeaea;
     transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 .features .fa-icon {
@@ -83,14 +98,56 @@
 }
 
 
-.guideline {
-    margin-top: 5%;
-    border-radius: 10px;
+/* New styles for welcome modal */
+.welcome-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
     padding: 20px;
-    background: linear-gradient(135deg, rgba(60, 0, 160, 0.6), rgba(0, 128, 128, 0.5));
+    border-radius: 10px;
+    width: 800px;
+    height: 630px;
+    max-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 999; /* Ensure modal is above other content */
+}
+
+.welcome-modal h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #303ef7; /* Adjusted color for heading */
+}
+
+.welcome-modal p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+
+.welcome-modal ul li {
+    font-size: 16px;
+    margin-bottom: 4px;
+    list-style: none;
+    padding-left: 30px;
+}
+
+
+.welcome-modal button {
+    padding: 12px 24px; /* Slightly increased padding */
+    font-size: 16px;
+    cursor: pointer;
+    background: #303ef7;
     color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    font-size: medium;
-    font-weight:lighter;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    outline: none; /* Removed outline on button focus */
+    display: block;
+    margin: 0 auto; /* Center button horizontally */
+}
+
+.welcome-modal button:hover {
+    background: #1e2ae6;
 }

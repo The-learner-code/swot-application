@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../Styles/bookingdetails.css';
 
 const BookingDetails = () => {
@@ -53,11 +55,11 @@ const BookingDetails = () => {
         await setDoc(bookingRequestRef, {
           vehicleNumber: vehicle.id,
           vehicleType: vehicle.vehicleType,
-          vehicleModel : vehicle.vehicleModel,
+          vehicleModel: vehicle.vehicleModel,
           seatingSize: vehicle.seatingSize,
           startDate,
           endDate,
-          userEmail : email,
+          userEmail: email,
           status: 'Booked - Waiting Confirmation',
           timestamp: timestamp.toString(), // Adding the timestamp
         });
@@ -65,14 +67,25 @@ const BookingDetails = () => {
         const vehicleRef = doc(db, 'VehicleDetails', vehicle.id);
         await setDoc(vehicleRef, { status: 'Not_Available' }, { merge: true });
 
-        alert('Booking request submitted successfully!');
-        navigate('/ViewVehicle'); // Redirect to home or another page
+        toast.success('Booking request submitted successfully!', {
+          autoClose: 3000, // Auto close the toast after 3 seconds
+        });
+        setTimeout(() => {
+          navigate('/ViewVehicle'); // Redirect to home or another page
+      }, 3000); // Delay of 3 seconds
+
+        
       } catch (error) {
         console.error('Error adding booking request:', error);
-        alert('Failed to submit booking request.');
+
+        toast.error('Failed to submit booking request.', {
+          autoClose: 3000, // Auto close the toast after 3 seconds
+        });
       }
     } else {
-      alert('The vehicle is not available for the selected dates.');
+      toast.error('The vehicle is not available for the selected dates.', {
+        autoClose: 3000, // Auto close the toast after 3 seconds
+      });
     }
   };
 
@@ -99,6 +112,7 @@ const BookingDetails = () => {
           <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -6,7 +6,6 @@ import mail_icon from '../Assets/mail-icon.png'
 import phone_icon from '../Assets/phone-icon.png'
 import location_icon from '../Assets/location-icon.png'
 import white_arrow from '../Assets/white-arrow.png'
-import Title from '../Components/Title'
 
 const ContactUs = () => {
   const navigate = useNavigate();
@@ -38,13 +37,10 @@ const ContactUs = () => {
   return (
 
     <div className='contactus-cotainer'>
-      <div className="BackToHome">
-        <button onClick={() => navigate('/')} className="link-btn">Back to Home</button>
+      <div className="Back">
+        <button onClick={() => navigate('/')} className="link">Back to Home</button>
       </div>
-
-      <Title subtitle='Contact Us' title='Get Connected' />
       <div className='contactlp'>
-
         <div className="contact-col">
           <h3>Send us a message<img src={msg_icon} alt="" /></h3>
           <p>Feel free to reach out through our contact form or find our contact information below. Your feedback, questions, and suggestions are important to us as we strive to provide exceptional vehicle rental services. We're here to assist you with all your rental needs.</p>
