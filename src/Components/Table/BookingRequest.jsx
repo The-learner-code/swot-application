@@ -51,14 +51,14 @@ const BookingRequest = () => {
   };
 
   const columns = [
-    { field: 'timestamp', headerName: 'timestamp', width: 250, headerClassName: 'table-header' },
-    { field: 'userEmail', headerName: 'userEmail', width: 200, headerClassName: 'table-header' },
-    { field: 'vehicleType', headerName: 'Vehicle Type', width: 100, headerClassName: 'table-header' },
-    { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 120, headerClassName: 'table-header' },
-    { field: 'seatingSize', headerName: 'Seating Size', width: 100, headerClassName: 'table-header' },
+    { field: 'timestamp', headerName: 'Timestamp', width: 180, headerClassName: 'table-header' },
+    { field: 'userEmail', headerName: 'Email', width: 200, headerClassName: 'table-header' },
+    { field: 'vehicleType', headerName: 'Vehicle Type', width: 120, headerClassName: 'table-header' },
+    { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 150, headerClassName: 'table-header' },
+    { field: 'seatingSize', headerName: 'Seating Size', width: 130, headerClassName: 'table-header' },
     { field: 'startDate', headerName: 'From', width: 100, headerClassName: 'table-header' },
     { field: 'endDate', headerName: 'To', width: 100, headerClassName: 'table-header' },
-    { field: 'status', headerName: 'Status', width: 250, headerClassName: 'table-header' },
+    { field: 'status', headerName: 'Status', width: 100, headerClassName: 'table-header' },
     {
       field: 'confirm',
       headerName: 'Confirm',

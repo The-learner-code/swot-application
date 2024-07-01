@@ -35,17 +35,17 @@ const VehicleTable = () => {
   };
 
   const columns = [
-    { field: 'email', headerName: 'email', width: 150, headerClassName: 'table-header' },
-    { field: 'vehicleType', headerName: 'vehicle Type', width: 150, headerClassName: 'table-header' },
-    { field: 'vehicleNumber', headerName: 'vehicle Number', width: 200, headerClassName: 'table-header' },
-    { field: 'seatingSize', headerName: 'seating Size', width: 200, headerClassName: 'table-header' },
-    { field: 'availableFrom', headerName: 'availableFrom', width: 200, headerClassName: 'table-header' },
-    { field: 'availableTo', headerName: 'availableTo', width: 250, headerClassName: 'table-header' },
-    { field: 'status', headerName: 'status', width: 150, headerClassName: 'table-header' },
+    { field: 'email', headerName: 'Email Id', width: 200, headerClassName: 'table-header' },
+    { field: 'vehicleType', headerName: 'Vehicle Type', width: 150, headerClassName: 'table-header' },
+    { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 200, headerClassName: 'table-header' },
+    { field: 'seatingSize', headerName: 'Seating Size', width: 150, headerClassName: 'table-header' },
+    { field: 'availableFrom', headerName: 'Available From', width: 150, headerClassName: 'table-header' },
+    { field: 'availableTo', headerName: 'Available To', width: 150, headerClassName: 'table-header' },
+    { field: 'status', headerName: 'Status', width: 150, headerClassName: 'table-header' },
     {
       field: 'imageUrl',
       headerName: 'Car Photo',
-      width: 150,
+      width: 130,
       headerClassName: 'table-header',
       renderCell: (params) => (
         <Link href={params.value} target="_blank" rel="noopener">
@@ -57,7 +57,7 @@ const VehicleTable = () => {
       field: 'pdfUrl',
       headerName: 'Car Document',
       headerClassName: 'table-header',
-      width: 150,
+      width: 130,
       renderCell: (params) => (
         <Link href={params.value} target="_blank" rel="noopener">
           View Document
@@ -72,7 +72,7 @@ const VehicleTable = () => {
       renderCell: (params) => (
         <Button
           variant="contained"
-          color="secondary"
+          color="primary"
           onClick={() => handleRemove(params.row.id)}
         >
           Remove
@@ -88,8 +88,12 @@ const VehicleTable = () => {
           <DataGrid
             rows={vehicledetail}
             columns={columns}
-            pageSize={10} // You can set the default page size here
-            pageSizeOptions={[5, 10, 20]}
+            initialState={{
+              pagination: {
+                  paginationModel: { page: 0, pageSize: 10 },
+              },
+          }}
+          pageSizeOptions={[5, 10, 20]}
           />
         </div>
       )}

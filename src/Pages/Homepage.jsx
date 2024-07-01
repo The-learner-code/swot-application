@@ -10,7 +10,7 @@ const Homepage = () => {
         <Navbar />
         <Hero/>
         <div className='container'>
-        <Title title='Abouts Us' />
+        <Title title='About Us' />
         <About/>
         <Footer/>
         </div>

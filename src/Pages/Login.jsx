@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from "../firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,52 +21,62 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (email === "vrms@gmail.com" && password === '123456') {
-      navigate('/ListOfUser');
-    }
-    else {
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log(userCredential);
-        const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCredential);
+      const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
 
-        // Update the lastSignInTime in AuthDetails collection
-        const authDetailsRef = doc(db, "AuthDetails", email);
-        await updateDoc(authDetailsRef, {
-          lastSignInTime: timestamp
-        });
+      // Update the lastSignInTime in AuthDetails collection
+      const authDetailsRef = doc(db, "AuthDetails", email);
+      await updateDoc(authDetailsRef, {
+        lastSignInTime: timestamp
+      });
 
-        toast.success("User logged in successfully");
-        setTimeout(() => {
-          navigate('/Features');
-        }, 2000);
-        resetForm();
-      } catch (error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        toast.error(`Login Unsuccessful. Error code: ${errorCode}, Error message: ${errorMessage}`);
-        resetForm();
-      }
+      toast.success("User logged in successfully");
+      setTimeout(() => {
+        if (email === "vrmsrentalease@gmail.com") {
+          navigate('/ListOfUser');
+        } else { navigate('/Features'); }
+      }, 2000);
+      resetForm();
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      toast.error(`Login Unsuccessful. Error code: ${errorCode}, Error message: ${errorMessage}`);
+      resetForm();
     }
+
   };
 
-  const handleForgotPassword = async (e) => {
-    e.preventDefault(); 
-    const trimmedEmail = email.trim(); 
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    const trimmedEmail = email.trim();
+    
     if (!trimmedEmail) {
       toast.error("Please enter your email address to reset password.", { autoClose: 2500 });
-      resetForm(); 
+      resetForm();
       return;
     }
-
+    
     try {
-      await sendPasswordResetEmail(auth, trimmedEmail); 
+      // Check if email exists in the AuthDetails collection
+      const q = query(collection(db, "AuthDetails"), where("Email_id", "==", trimmedEmail));
+      const querySnapshot = await getDocs(q);
+      const querySnapshotlist = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      console.log(querySnapshotlist)
+      if (querySnapshot.empty) {
+        toast.error("Error sending password reset email: User is not registered", { autoClose: 2500 });
+        resetForm();
+        return;
+      }
+      
+      await sendPasswordResetEmail(auth, trimmedEmail);
       toast.success("Password reset email sent successfully.", { autoClose: 2500 });
-      resetForm(); 
+      resetForm();
     } catch (error) {
       toast.error(`Error sending password reset email: ${error.message}`, { autoClose: 2500 });
-      resetForm(); 
+      resetForm();
     }
   };
 

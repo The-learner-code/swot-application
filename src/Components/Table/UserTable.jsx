@@ -29,12 +29,12 @@ const UserTable = () => {
     const columns = [
         { field: 'type', headerName: 'Type', width: 120, headerClassName: 'table-header' },
         { field: 'Name', headerName: 'Name', width: 150, headerClassName: 'table-header' },
-        { field: 'Email_id', headerName: 'Email_id', width: 200, headerClassName: 'table-header' },
+        { field: 'Email_id', headerName: 'Email id', width: 200, headerClassName: 'table-header' },
         { field: 'createdAt', headerName: 'Created Date', width: 200, headerClassName: 'table-header' },
         { field: 'lastSignInTime', headerName: 'Last Signed In', width: 200, headerClassName: 'table-header' },
         { field: 'Address', headerName: 'Address', width: 250, headerClassName: 'table-header' },
         { field: 'State', headerName: 'State', width: 150, headerClassName: 'table-header' },
-        { field: 'Phone_Number', headerName: 'Phone_Number', width: 150, headerClassName: 'table-header' },
+        { field: 'Phone_Number', headerName: 'Phone Number', width: 150, headerClassName: 'table-header' },
     ];
 
     return (
