@@ -12,6 +12,7 @@ import ViewBooking from './Pages/ViewBooking';
 import ListOfUser from './Pages/ListOfUser';
 import ListOfVehicle from './Pages/ListOfVehicle';
 import RequestCompletion from './Pages/RequestCompletion';
+import Charts from './Reports/Charts';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path='/ListOfUser' element={<ListOfUser />} />
         <Route path='/ListOfVehicle' element={<ListOfVehicle />} />
         <Route path='/RequestCompletion' element={<RequestCompletion />} />
+        <Route path='/Charts' element={<Charts />} />
       </Routes>
     </BrowserRouter>
   );

@@ -27,7 +27,7 @@ const StudentTable = () => {
   }, [currentEmail]);
 
   const columns = [
-    { field: 'timestamp', headerName: 'Timestamp', width: 100 },
+    { field: 'timestamp', headerName: 'Timestamp', width: 200 },
     { field: 'vehicleType', headerName: 'Vehicle Type', width: 150 },
     { field: 'vehicleModel', headerName: 'Vehicle Model', width: 150 },
     { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 200 },

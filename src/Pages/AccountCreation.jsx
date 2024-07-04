@@ -7,6 +7,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../Styles/loginandregister.css';
 
+import { IconButton, InputAdornment, TextField } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 const AccountCreation = () => {
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
@@ -16,6 +20,12 @@ const AccountCreation = () => {
     const [password, setPassword] = useState("");
     const [conpass, setConpass] = useState("");
     const navigate = useNavigate();
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleTogglePasswordVisibility = () => {
+        setShowPassword((prevShowPassword) => !prevShowPassword);
+    };
 
     const resetForm = () => {
         setEmail("");
@@ -68,7 +78,7 @@ const AccountCreation = () => {
             return;
         }
         if (conpass.trim() !== password.trim()) {
-            toast.error("Password and Confirm Password do not match...!", { position: "bottom-left" });
+            toast.error("Password and Confirm Password do not match...!");
             return;
         }
 
@@ -104,7 +114,7 @@ const AccountCreation = () => {
 
     return (
         <div className='Register-cotainer'>
-            <ToastContainer position="top-left" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+            <ToastContainer position="top-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className="Back">
                 <button onClick={() => navigate('/')} className="link">Back to Home</button>
             </div>
@@ -113,25 +123,63 @@ const AccountCreation = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <div className='input-field'>
-                            <input type="text" placeholder='Enter Your Sweet Name' value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+                            <TextField style={{ width: '100%' }} type="text" placeholder='Enter Your Sweet Name' value={fullName} onChange={(e) => setFullName(e.target.value)} required />
                         </div>
                         <div className='input-field'>
-                            <input type="email" placeholder='Enter Your Email_id' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            <TextField style={{ width: '100%' }} type="email" placeholder='Enter Your Email_id' value={email} onChange={(e) => setEmail(e.target.value)} required />
                         </div>
                         <div className='input-field'>
-                            <input type="text" placeholder='Enter Your Address and District' value={address} onChange={(e) => setAddress(e.target.value)} required />
+                            <TextField style={{ width: '100%' }} type="text" placeholder='Enter Your Address and District' value={address} onChange={(e) => setAddress(e.target.value)} required />
                         </div>
                         <div className='input-field'>
-                            <input type="text" placeholder='Enter Your State' value={state} onChange={(e) => setState(e.target.value)} required />
+                            <TextField style={{ width: '100%' }} type="text" placeholder='Enter Your State' value={state} onChange={(e) => setState(e.target.value)} required />
                         </div>
                         <div className='input-field'>
-                            <input type="tel" placeholder='Enter Your Mobile Number' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                            <TextField style={{ width: '100%' }} type="tel" placeholder='Enter Your Mobile Number' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
                         </div>
-                        <div className='input-field'>
-                            <input type="password" placeholder='Enter Your password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <div className="input-field">
+                            <TextField
+                                style={{ width: '100%' }}
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter Your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleTogglePasswordVisibility}
+                                            >
+                                                {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
                         </div>
-                        <div className='input-field'>
-                            <input type="password" placeholder='Confirm Your password' value={conpass} onChange={(e) => setConpass(e.target.value)} required />
+                        <div className="input-field">
+                            <TextField
+                                style={{ width: '100%' }}
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Confirm Your password"
+                                value={conpass}
+                                onChange={(e) => setConpass(e.target.value)}
+                                required
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleTogglePasswordVisibility}
+                                            >
+                                                {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
                         </div>
                         <div className='btn-field'>
                             <button type="submit" className="btn-sub">Submit</button>
@@ -139,7 +187,8 @@ const AccountCreation = () => {
                     </div>
                 </form>
             </div>
-        </div>);
+        </div>
+        );
 };
 
 export default AccountCreation;

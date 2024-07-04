@@ -4,12 +4,12 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCmtr4RFpRZb6S6VV3rpdCGDdFLzAbHDMw",
-    authDomain: "cpms-fca1e.firebaseapp.com",
-    projectId: "cpms-fca1e",
-    storageBucket: "cpms-fca1e.appspot.com",
-    messagingSenderId: "763343437611",
-    appId: "1:763343437611:web:09cc7394b3d9c99389cf6e"
+    apiKey: "AIzaSyBBYYlQA3zUkaeAbl8B8OgcnLIrHQCmAcI",
+    authDomain: "vrms-408cd.firebaseapp.com",
+    projectId: "vrms-408cd",
+    storageBucket: "vrms-408cd.appspot.com",
+    messagingSenderId: "832347966546",
+    appId: "1:832347966546:web:53892b6982e84a6360238b"
 };
 
 const app = initializeApp(firebaseConfig);

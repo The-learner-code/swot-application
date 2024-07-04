@@ -63,6 +63,15 @@ const UserProfile = () => {
         handleDocUpload()
       ]);
 
+      if (!imageUrl) {
+        toast.error("Photo is empty, Please add Photo");
+        return;
+    }
+    if (!pdfUrl) {
+        toast.error("Document is empty, Please add Document");
+        return;
+    }
+
       // Save form data and URLs to Firestore
       await setDoc(doc(db, 'VehicleDetails', vehicleNumber), {
         email,

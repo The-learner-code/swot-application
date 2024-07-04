@@ -8,11 +8,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import { doc, updateDoc } from "firebase/firestore";
 import '../Styles/loginandregister.css';
 
+import { IconButton, InputAdornment, TextField } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
+
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
   const resetForm = () => {
     setEmail("");
     setPassword("");
@@ -52,13 +63,13 @@ const Login = () => {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     const trimmedEmail = email.trim();
-    
+
     if (!trimmedEmail) {
       toast.error("Please enter your email address to reset password.", { autoClose: 2500 });
       resetForm();
       return;
     }
-    
+
     try {
       // Check if email exists in the AuthDetails collection
       const q = query(collection(db, "AuthDetails"), where("Email_id", "==", trimmedEmail));
@@ -70,7 +81,7 @@ const Login = () => {
         resetForm();
         return;
       }
-      
+
       await sendPasswordResetEmail(auth, trimmedEmail);
       toast.success("Password reset email sent successfully.", { autoClose: 2500 });
       resetForm();
@@ -91,10 +102,29 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <div className='input-field'>
-              <input type="email" className="login-input" placeholder='Enter Email_id' value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <TextField style={{ width: '100%' }} type="email" className="login-input" placeholder='Enter Email_id' value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
-            <div className='input-field'>
-              <input type="password" className="login-input" placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <div className="input-field">
+              <TextField
+                style={{ width: '100%' }}
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleTogglePasswordVisibility}
+                      >
+                        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
             </div>
             <p><button type="button" className="btn_forget" onClick={handleForgotPassword} >Forgot Password</button></p>
             <div className='btn-field'>

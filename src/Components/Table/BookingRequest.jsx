@@ -58,7 +58,7 @@ const BookingRequest = () => {
     { field: 'seatingSize', headerName: 'Seating Size', width: 130, headerClassName: 'table-header' },
     { field: 'startDate', headerName: 'From', width: 100, headerClassName: 'table-header' },
     { field: 'endDate', headerName: 'To', width: 100, headerClassName: 'table-header' },
-    { field: 'status', headerName: 'Status', width: 100, headerClassName: 'table-header' },
+    { field: 'status', headerName: 'Status', width: 300, headerClassName: 'table-header' },
     {
       field: 'confirm',
       headerName: 'Confirm',
