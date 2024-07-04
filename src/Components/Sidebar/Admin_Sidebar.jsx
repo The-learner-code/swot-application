@@ -46,6 +46,10 @@ const User_Sidebar = () => {
                         <EventAvailableIcon className='icon' />
                         <span>Booking Conformation</span>
                     </li>
+                    <li onClick={() => navigate('/Report')}>
+                        <EventAvailableIcon className='icon' />
+                        <span>Reports</span>
+                    </li>
                 </ul>
             </div>
             <div className="bottom">

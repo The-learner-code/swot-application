@@ -13,6 +13,7 @@ import ListOfUser from './Pages/ListOfUser';
 import ListOfVehicle from './Pages/ListOfVehicle';
 import RequestCompletion from './Pages/RequestCompletion';
 import Charts from './Reports/Charts';
+import Report from './Pages/Report';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path='/ListOfVehicle' element={<ListOfVehicle />} />
         <Route path='/RequestCompletion' element={<RequestCompletion />} />
         <Route path='/Charts' element={<Charts />} />
+        <Route path='/Report' element={<Report />} />
       </Routes>
     </BrowserRouter>
   );
