@@ -98,7 +98,7 @@ const Login = () => {
       </div>
       <div className="form-box">
         <h1>Login...!</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className="input-group">
             <div className='input-field'>
               <TextField style={{ width: '100%' }} type="email" className="login-input" placeholder='Enter Email_id' value={email} onChange={(e) => setEmail(e.target.value)} required />

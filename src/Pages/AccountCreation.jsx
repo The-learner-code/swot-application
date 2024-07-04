@@ -129,7 +129,7 @@ const AccountCreation = () => {
             </div>
             <div className="form-box">
                 <h1>Enroll Your Detail...!</h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} autoComplete="off">
                     <div className="input-group">
                         <div className='input-field'>
                             <TextField style={{ width: '100%' }} type="text" placeholder='Enter Your Sweet Name' value={fullName} onChange={(e) => setFullName(e.target.value)} required />

@@ -31,7 +31,7 @@ const UserProfile = () => {
 
   const handleImageUpload = async () => {
     if (!imageFile) return null;
-    const storageRef = ref(storage, `user_photos/${currentUser.uid}/${imageFile.name}`);
+    const storageRef = ref(storage, `user_car_photo/${currentUser.uid}/${imageFile.name}`);
     await uploadBytes(storageRef, imageFile);
     const downloadURL = await getDownloadURL(storageRef);
     return downloadURL;
@@ -39,7 +39,7 @@ const UserProfile = () => {
 
   const handleDocUpload = async () => {
     if (!pdfFile) return null;
-    const storageRef = ref(storage, `user_resumes/${currentUser.uid}/${pdfFile.name}`);
+    const storageRef = ref(storage, `user_documents/${currentUser.uid}/${pdfFile.name}`);
     await uploadBytes(storageRef, pdfFile);
     const downloadURL = await getDownloadURL(storageRef);
     return downloadURL;

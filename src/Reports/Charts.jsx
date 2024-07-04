@@ -46,26 +46,31 @@ const Charts = () => {
     filterData(vehicleType, time, month);
   };
 
+
   const handleMonthChange = (event) => {
     const selectedMonth = event.target.value;
     setMonth(selectedMonth);
     filterData(vehicleType, timeFilter, selectedMonth);
   };
 
-  const filterData = (vehicleType, timeFilter, month) => {
+  const filterData = (vehicleType, timeFilter, selectedMonth) => {
     let filtered = bookingData;
-
+  
     if (vehicleType !== 'All') {
       filtered = filtered.filter(booking => booking.vehicleType === vehicleType);
     }
-
+  
     if (timeFilter !== 'All') {
       filtered = filtered.filter(booking => {
-        const bookingDate = new Date(booking.timestamp);
-        return bookingDate.getMonth() + 1 === month;
+        const parts = booking.timestamp.split(', '); // Splitting into date and time parts
+        const dateParts = parts[0].split('/').map(Number); // Splitting date part into day, month, year
+        const [day, month, year] = dateParts;
+        const bookingMonth = month; // Assuming month is 1-indexed
+  
+        return bookingMonth === selectedMonth;
       });
     }
-
+  
     setFilteredData(filtered);
   };
 
@@ -194,7 +199,7 @@ const Charts = () => {
               scales: {
                 x: {
                   ticks: {
-                    callback: function(value, index, values) {
+                    callback: function (value, index, values) {
                       const label = this.getLabelForValue(value);
                       return label === 'Booked - Waiting Confirmation' ? 'Waiting' : label;
                     }
