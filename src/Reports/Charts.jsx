@@ -6,6 +6,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { collection, getDocs } from 'firebase/firestore'; // Adjust this import based on your Firebase setup
 import { db } from '../firebase'; // Adjust this import based on your Firebase setup
 import './chart.css';
+
 // Registering chart.js components and plugins
 ChartJS.register(LinearScale, CategoryScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
@@ -74,8 +75,6 @@ const Charts = () => {
       return acc;
     }, {});
 
-    const total = data.length;
-
     return {
       labels: Object.keys(statusCounts),
       datasets: [{
@@ -107,7 +106,7 @@ const Charts = () => {
     const total = data.length;
 
     return Object.keys(statusCounts).reduce((acc, key) => {
-      acc[key] = ((statusCounts[key] / total) * 100).toFixed(2) + '%';
+      acc[key] = ((statusCounts[key] / total) * 100).toFixed(2);
       return acc;
     }, {});
   };
@@ -117,7 +116,7 @@ const Charts = () => {
   return (
     <Grid className="placement-result-container">
       <Grid className="placement-result-item">
-        <Paper className="placement-result-paper-batch">
+        <Paper className="placement-result-paper">
           <Typography variant="h6" gutterBottom align="center">
             Booking Status by Vehicle Type
           </Typography>
@@ -129,43 +128,48 @@ const Charts = () => {
               value={vehicleType}
               onChange={handleVehicleTypeChange}
               label="Vehicle Type"
+              sx={{ height: 35 }} // Adjust the height value as needed
             >
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Car">Car</MenuItem>
               <MenuItem value="Bike">Bike</MenuItem>
             </Select>
           </FormControl>
-          <FormControl fullWidth variant="outlined" margin="normal">
-            <InputLabel id="time-filter-label">Time Filter</InputLabel>
-            <Select
-              labelId="time-filter-label"
-              id="time-filter"
-              value={timeFilter}
-              onChange={handleTimeFilterChange}
-              label="Time Filter"
-            >
-              <MenuItem value="All">All</MenuItem>
-              <MenuItem value="Month">Month</MenuItem>
-            </Select>
-          </FormControl>
-          {timeFilter !== 'All' && (
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel id="month-label">Month</InputLabel>
+          <div className="filter-container">
+            <FormControl variant="outlined" margin="normal" className="time-filter">
+              <InputLabel id="time-filter-label">Time Filter</InputLabel>
               <Select
-                labelId="month-label"
-                id="month"
-                value={month}
-                onChange={handleMonthChange}
-                label="Month"
+                labelId="time-filter-label"
+                id="time-filter"
+                value={timeFilter}
+                onChange={handleTimeFilterChange}
+                label="Time Filter"
+                sx={{ height: 35 }} // Adjust the height value as needed
               >
-                {[...Array(12).keys()].map(i => (
-                  <MenuItem key={i + 1} value={i + 1}>
-                    {new Date(0, i).toLocaleString('default', { month: 'long' })}
-                  </MenuItem>
-                ))}
+                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="Month">Month</MenuItem>
               </Select>
             </FormControl>
-          )}
+            {timeFilter !== 'All' && (
+              <FormControl variant="outlined" margin="normal" className="month-filter">
+                <InputLabel id="month-label">Month</InputLabel>
+                <Select
+                  labelId="month-label"
+                  id="month"
+                  value={month}
+                  onChange={handleMonthChange}
+                  label="Month"
+                  sx={{ height: 35 }} // Adjust the height value as needed
+                >
+                  {[...Array(12).keys()].map(i => (
+                    <MenuItem key={i + 1} value={i + 1}>
+                      {new Date(0, i).toLocaleString('default', { month: 'long' })}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
+          </div>
           <Bar
             data={getStatusCounts(filteredData)}
             options={{
@@ -179,15 +183,23 @@ const Charts = () => {
                   align: 'end',
                   formatter: (value, context) => {
                     const label = context.chart.data.labels[context.dataIndex];
-                    return percentData[label];
+                    return `${percentData[label]}%`;
                   },
-                  font:{
+                  font: {
                     weight: 'bold',
                   },
                   color: 'black',
                 }
               },
               scales: {
+                x: {
+                  ticks: {
+                    callback: function(value, index, values) {
+                      const label = this.getLabelForValue(value);
+                      return label === 'Booked - Waiting Confirmation' ? 'Waiting' : label;
+                    }
+                  }
+                },
                 y: {
                   beginAtZero: true
                 }

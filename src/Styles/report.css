@@ -5,6 +5,7 @@
 
 .Reportcontainer {
     flex: 6;
+
 }
 
 .GraphContainer {
@@ -12,6 +13,8 @@
     border-radius: 10px;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-    padding: 50px;
-    margin: 35px;
+    width: 600px;
+    padding: 15px;
+    margin-top: 5%;
+    margin-left: 23%;
 }

@@ -8,6 +8,7 @@ import GarageIcon from '@mui/icons-material/Garage';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
 const User_Sidebar = () => {
     const navigate = useNavigate();
@@ -47,8 +48,8 @@ const User_Sidebar = () => {
                         <span>Booking Conformation</span>
                     </li>
                     <li onClick={() => navigate('/Report')}>
-                        <EventAvailableIcon className='icon' />
-                        <span>Reports</span>
+                        <AssessmentIcon className='icon' />
+                        <span>Booking Report</span>
                     </li>
                 </ul>
             </div>
