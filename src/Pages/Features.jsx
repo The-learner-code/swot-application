@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from "../firebase";
 import { signOut } from 'firebase/auth';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast, toastContainer } from '../toast';
 import PersonIcon from '@mui/icons-material/Person';
 import EditIcon from '@mui/icons-material/Edit';
 import '../Styles/features.css';
@@ -38,7 +38,7 @@ const UserDashboard = () => {
 
                     <h3>Rental Rates:</h3>
                     <ul>
-                    <p>Current rates:</p>
+                        <p>Current rates:</p>
                         <li>4-Seater Car: ₹1,000/day</li>
                         <li>5-Seater Car: ₹1,200/day</li>
                         <li>Bike: ₹500/day</li>
@@ -61,7 +61,7 @@ const UserDashboard = () => {
                     <button onClick={closeWelcomeModal}>Reed, Accept to continue...!</button>
                 </div>
             )}
-            <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+            {toastContainer}
             <div> <button className="btn-lo" onClick={handleLogout}>LogOut</button></div>
             <div className='feat-container'>
                 <h1>Solution Suite</h1>

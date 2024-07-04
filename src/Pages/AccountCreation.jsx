@@ -1,17 +1,18 @@
-import { useState } from "react";
-import { auth, db } from '../firebase';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '../Styles/loginandregister.css';
+// Import necessary modules and components from various libraries
+import { useState } from "react"; // Import useState hook from React
+import { auth, db } from '../firebase'; // Import auth and db instances from firebase configuration
+import { createUserWithEmailAndPassword } from "firebase/auth"; // Import createUserWithEmailAndPassword function from Firebase Authentication
+import { setDoc, doc } from "firebase/firestore"; // Import setDoc and doc functions from Firebase Firestore
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook from React Router
+import { toast, toastContainer } from '../toast'; // Import ToastContainer and toast from react-toastify for notifications
+import '../Styles/loginandregister.css'; // Import custom CSS for styling
+import { IconButton, InputAdornment, TextField } from '@mui/material'; // Import components from Material-UI
+import VisibilityIcon from '@mui/icons-material/Visibility'; // Import visibility icon for password field
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; // Import visibility off icon for password field
 
-import { IconButton, InputAdornment, TextField } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+// Define the AccountCreation component
 const AccountCreation = () => {
+    // Define state variables to manage form inputs
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
     const [address, setAddress] = useState("");
@@ -19,14 +20,16 @@ const AccountCreation = () => {
     const [state, setState] = useState("");
     const [password, setPassword] = useState("");
     const [conpass, setConpass] = useState("");
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Initialize navigate function for navigation
 
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false); // State variable to toggle password visibility
 
+    // Function to toggle password visibility
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
+    // Function to reset form inputs
     const resetForm = () => {
         setEmail("");
         setFullName("");
@@ -37,18 +40,22 @@ const AccountCreation = () => {
         setConpass("");
     };
 
+    // Function to validate email format
     const validateEmail = (email) => {
         return String(email)
             .toLowerCase()
             .endsWith('@gmail.com');
     };
 
+    // Function to validate phone number format
     const validatePhoneNumber = (phoneNumber) => {
         return /^\d{10}$/.test(phoneNumber);
     };
 
+    // Function to handle form submission
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission behavior
+        // Validate form inputs and show error messages if invalid
         if (!validateEmail(email.trim()) || email.trim() === "" || email.trim() === " ") {
             toast.error("Please enter a valid Email_id ending with @gmail.com...!");
             return;
@@ -83,12 +90,14 @@ const AccountCreation = () => {
         }
 
         try {
+            // Create a new user with email and password
             const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
             console.log(userCredential);
-            const authDetailsRef = doc(db, "AuthDetails", email);
-            const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-            const userType = email === "vrmsrentalease@gmail.com" ? "Admin" : "Vehicle_User";
+            const authDetailsRef = doc(db, "AuthDetails", email); // Create a reference to the user's document in Firestore
+            const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }); // Get current timestamp
+            const userType = email === "vrmsrentalease@gmail.com" ? "Admin" : "Vehicle_User"; // Determine user type based on email
 
+            // Save user details in Firestore
             await setDoc(authDetailsRef, {
                 Name: fullName,
                 Email_id: email,
@@ -100,21 +109,21 @@ const AccountCreation = () => {
                 type: userType
             });
 
-            toast.success(`${email} Profile Created successfully!`);
+            toast.success(`${email} Profile Created successfully!`); // Show success notification
             setTimeout(() => {
-                navigate('/Login');
+                navigate('/Login'); // Navigate to login page after 3 seconds
             }, 3000); // Delay of 3 seconds
-            resetForm();
+            resetForm(); // Reset form inputs
         } catch (error) {
-            toast.error(`Registration Unsuccessful. Error code: ${error.message}`);
+            toast.error(`Registration Unsuccessful. Error code: ${error.message}`); // Show error notification
             console.log(error);
-            resetForm();
+            resetForm(); // Reset form inputs
         }
     };
 
     return (
         <div className='Register-cotainer'>
-            <ToastContainer position="top-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+           {toastContainer}
             <div className="Back">
                 <button onClick={() => navigate('/')} className="link">Back to Home</button>
             </div>
@@ -188,7 +197,7 @@ const AccountCreation = () => {
                 </form>
             </div>
         </div>
-        );
+    );
 };
 
-export default AccountCreation;
+export default AccountCreation; // Export the AccountCreation component as the default export

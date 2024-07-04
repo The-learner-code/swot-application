@@ -6,8 +6,7 @@ import '../Styles/updatevehicle.css';
 import Sidebar from '../Components/Sidebar/User_Sidebar';
 import Navbar from '../Components/Header/Navbar';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, toastContainer } from '../toast';
 import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
@@ -66,11 +65,11 @@ const UserProfile = () => {
       if (!imageUrl) {
         toast.error("Photo is empty, Please add Photo");
         return;
-    }
-    if (!pdfUrl) {
+      }
+      if (!pdfUrl) {
         toast.error("Document is empty, Please add Document");
         return;
-    }
+      }
 
       // Save form data and URLs to Firestore
       await setDoc(doc(db, 'VehicleDetails', vehicleNumber), {
@@ -117,6 +116,7 @@ const UserProfile = () => {
 
   return (
     <div className='UserProfile'>
+      {toastContainer}
       <Sidebar />
       <div className="UserProfilecontainer">
         <Navbar />
@@ -162,7 +162,6 @@ const UserProfile = () => {
           </form>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

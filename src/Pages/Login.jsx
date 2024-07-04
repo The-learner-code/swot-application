@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth, db } from "../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, toastContainer } from '../toast';
 import { doc, updateDoc } from "firebase/firestore";
 import '../Styles/loginandregister.css';
 
@@ -93,7 +92,7 @@ const Login = () => {
 
   return (
     <div className='Login-cotainer'>
-      <ToastContainer position="top-left" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+    {toastContainer}
       <div className="Back">
         <button onClick={() => navigate('/')} className="link">Back to Home</button>
       </div>

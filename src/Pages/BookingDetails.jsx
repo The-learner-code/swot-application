@@ -3,8 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, toastContainer } from '../toast';
 import '../Styles/bookingdetails.css';
 
 const BookingDetails = () => {
@@ -95,6 +94,7 @@ const BookingDetails = () => {
 
   return (
     <div className='booking-page'>
+      {toastContainer}
       <div className="booking-container">
         <h1>Booking Details for {vehicle.vehicleType}</h1>
         <form onSubmit={handleBooking}>
@@ -112,7 +112,6 @@ const BookingDetails = () => {
           <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from "../../firebase";
 import './sidebar.css';
 import { signOut } from "firebase/auth";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast, toastContainer } from '../../toast';
 import 'react-toastify/dist/ReactToastify.css';
 import GarageIcon from '@mui/icons-material/Garage';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -27,7 +27,7 @@ const User_Sidebar = () => {
 
     return (
         <div className="sidebar">
-            <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+           {toastContainer}
             <div className="top">
                 <span className="logo">Rent Ease</span>
             </div>
