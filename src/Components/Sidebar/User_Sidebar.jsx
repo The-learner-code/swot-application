@@ -36,7 +36,7 @@ const User_Sidebar = () => {
                 <ul>
                     <li onClick={() => navigate('/UpdateVehicle')}>
                         <GarageIcon className='icon' />
-                        <span>Update Vehicle</span>
+                        <span>Add Vehicle</span>
                     </li>
                     <li onClick={() => navigate('/VehicleDetails')}>
                         <VisibilityIcon className='icon' />

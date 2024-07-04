@@ -28,7 +28,7 @@ const StudentTable = () => {
 
   const columns = [
     { field: 'vehicleType', headerName: 'Vehicle Type', width: 150 },
-    { field: 'vehicleModel', headerName: 'vehicleModel', width: 200 },
+    { field: 'vehicleModel', headerName: 'Vehicle Model', width: 200 },
     { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 200 },
     { field: 'seatingSize', headerName: 'Seating Size', width: 150 },
     { field: 'availableFrom', headerName: 'Available From', width: 150 },

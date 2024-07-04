@@ -42,9 +42,8 @@ const AccountCreation = () => {
 
     // Function to validate email format
     const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .endsWith('@gmail.com');
+        const re = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+        return re.test(String(email).toLowerCase());
     };
 
     // Function to validate phone number format

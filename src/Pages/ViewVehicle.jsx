@@ -23,6 +23,7 @@ const ViewVehicle = () => {
         );
 
         const querySnapshot = await getDocs(q);
+        console.log(querySnapshot);
         const vehiclesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         console.log('Fetched Vehicles Data:', vehiclesData);
         setVehicles(vehiclesData);
