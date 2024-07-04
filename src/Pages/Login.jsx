@@ -64,7 +64,7 @@ const Login = () => {
     const trimmedEmail = email.trim();
 
     if (!trimmedEmail) {
-      toast.error("Please enter your email address to reset password.", { autoClose: 2500 });
+      toast.error("Please enter your email address to reset password.");
       resetForm();
       return;
     }
@@ -76,16 +76,16 @@ const Login = () => {
       const querySnapshotlist = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       console.log(querySnapshotlist)
       if (querySnapshot.empty) {
-        toast.error("Error sending password reset email: User is not registered", { autoClose: 2500 });
+        toast.error("Error sending password reset email: User is not registered");
         resetForm();
         return;
       }
 
       await sendPasswordResetEmail(auth, trimmedEmail);
-      toast.success("Password reset email sent successfully.", { autoClose: 2500 });
+      toast.success("Password reset email sent successfully.");
       resetForm();
     } catch (error) {
-      toast.error(`Error sending password reset email: ${error.message}`, { autoClose: 2500 });
+      toast.error(`Error sending password reset email: ${error.message}`);
       resetForm();
     }
   };
