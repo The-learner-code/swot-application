@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, updateDoc, doc, query, where } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../../drop/src/firebase";
 import { DataGrid } from '@mui/x-data-grid';
 import { CircularProgress, Button } from '@mui/material';
 import './table.css';

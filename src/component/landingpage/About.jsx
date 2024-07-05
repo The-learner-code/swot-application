@@ -1,6 +1,5 @@
-import React from 'react'
-import '../Styles/Home.css'
-import about_img from '../Assets/About.jpg';
+import about_img from '../../Assets/About.jpg';
+import '../../styles/Home.css'
 
 const Aboutus = () => {
   return (
@@ -9,6 +8,7 @@ const Aboutus = () => {
         <img src={about_img} alt="" className='about-img' />
       </div>
       <div className='about-right'>
+      <h3>ABOUT SERVICE</h3>
       <h2>Welcome to Rental Ease</h2>
         <p>At Rental Ease, we are dedicated to providing a seamless and reliable vehicle rental experience. Established with a vision to make transportation accessible and convenient, Rental Ease has grown into a trusted name in the vehicle rental industry.</p>
         <p>Our mission is to offer a diverse fleet of well-maintained vehicles, ranging from compact cars to luxury sedans, to meet the varied needs of our customers. With a focus on customer satisfaction, we ensure a hassle-free rental process, from booking to return.</p>

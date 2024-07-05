@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { auth } from "../../firebase";
+import { auth } from "../../../drop/src/firebase";
 import './sidebar.css';
 import { signOut } from "firebase/auth";
-import { toast, toastContainer } from '../../toast';
+import { toast, toastContainer } from '../../../drop/src/toast';
 import 'react-toastify/dist/ReactToastify.css';
 import GarageIcon from '@mui/icons-material/Garage';
 import VisibilityIcon from '@mui/icons-material/Visibility';
