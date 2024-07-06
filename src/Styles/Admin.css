@@ -1,9 +1,9 @@
-.ListOfUser {
+.tableclass {
     display: flex;
     width: 100%;
 }
 
-.ListOfUsercontainer {
+.tableclasscontainer {
     flex: 6;
 }
 

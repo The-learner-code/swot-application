@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { auth } from "../firebase";
-import { signOut } from 'firebase/auth';
-import { toast, toastContainer } from '../toast';
-import PersonIcon from '@mui/icons-material/Person';
-import EditIcon from '@mui/icons-material/Edit';
-import '../Styles/features.css';
+import React, { useState } from 'react'; // Import React and useState hook for state management
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
+import { auth } from "../firebase"; // Import Firebase authentication
+import { signOut } from 'firebase/auth'; // Import signOut function from Firebase
+import { toast, toastContainer } from '../toast'; // Import custom toast notifications
+import PersonIcon from '@mui/icons-material/Person'; // Import Person icon
+import EditIcon from '@mui/icons-material/Edit'; // Import Edit icon
+import '../styles/Features.css'; // Import CSS for styling
 
-const UserDashboard = () => {
-    const navigate = useNavigate();
-    const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+const Features = () => {
+    const navigate = useNavigate(); // Initialize navigation hook
+    const [showWelcomeModal, setShowWelcomeModal] = useState(true); // State to control the display of the welcome modal
 
+    // Function to handle user logout
     const handleLogout = async () => {
         try {
-            await signOut(auth);
-            toast.success('Logged out successfully!');
+            await signOut(auth); // Sign out user using Firebase authentication
+            toast.success('Logged out successfully!'); // Show success message
             setTimeout(() => {
-                navigate('/');
-            }, 3000); // Delay of 3 seconds
+                navigate('/'); // Redirect to the home page after a delay of 3 seconds
+            }, 3000);
         } catch (error) {
-            toast.error('Error logging out:', error);
+            toast.error('Error logging out:', error); // Show error message
         }
     };
 
+    // Function to close the welcome modal
     const closeWelcomeModal = () => {
-        setShowWelcomeModal(false);
+        setShowWelcomeModal(false); // Set state to hide the modal
     };
 
     return (
@@ -58,21 +60,21 @@ const UserDashboard = () => {
 
                     <h3>Damage and Penalties:</h3>
                     <p>Users pay for damages incurred during use.</p>
-                    <button onClick={closeWelcomeModal}>Reed, Accept to continue...!</button>
+                    <button onClick={closeWelcomeModal}>Read, Accept to continue...!</button> {/* Button to close the modal */}
                 </div>
             )}
-            {toastContainer}
-            <div> <button className="btn-lo" onClick={handleLogout}>LogOut</button></div>
+            {toastContainer} {/* Container for toast notifications */}
+            <div> <button className="btn-lo" onClick={handleLogout}>LogOut</button></div> {/* Logout button */}
             <div className='feat-container'>
                 <h1>Solution Suite</h1>
                 <div className="row">
-                    <div className="features" onClick={() => navigate('/UpdateVehicle')}>
-                        <PersonIcon className="fa-icon" />
+                    <div className="features" onClick={() => navigate('/UpdateVehicle')}> {/* Navigate to add vehicle page */}
+                        <PersonIcon className="fa-icon" /> {/* Icon for adding vehicle */}
                         <h2>Add vehicle for rental</h2>
                         <p>Refresh your details in a snap!</p>
                     </div>
-                    <div className="features" onClick={() => navigate('/ViewVehicle')}>
-                        <EditIcon className="fa-icon" />
+                    <div className="features" onClick={() => navigate('/ViewVehicle')}> {/* Navigate to view vehicle page */}
+                        <EditIcon className="fa-icon" /> {/* Icon for viewing vehicle */}
                         <h2>Move for Booking</h2>
                         <p>See your profile, anytime, anywhere.</p>
                     </div>
@@ -82,4 +84,4 @@ const UserDashboard = () => {
     );
 };
 
-export default UserDashboard;
+export default Features;

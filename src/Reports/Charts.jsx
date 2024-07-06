@@ -96,16 +96,16 @@ const Charts = () => {
         data: Object.values(statusCounts), // Data values (counts)
         backgroundColor: Object.keys(statusCounts).map(status => {
           // Colors for each status based on type
-          if (status === 'Confirmed') return 'rgba(75, 192, 75, 0.6)';
-          if (status === 'Declined') return 'rgba(255, 99, 132, 0.6)';
-          if (status === 'Booked - Waiting Confirmation') return 'rgba(255, 205, 86, 0.6)';
+          if (status === 'Confirmed - KYC Completed with User') return 'rgba(75, 192, 75, 0.6)'; // green
+          if (status === 'Declined - Discussed with User') return 'rgba(255, 99, 132, 0.6)'; // red
+          if (status === 'Booked - Waiting Confirmation') return 'rgba(255, 205, 86, 0.6)'; // yellow
           return 'rgba(75, 192, 192, 0.6)';
         }),
         borderColor: Object.keys(statusCounts).map(status => {
           // Border colors for each status based on type
-          if (status === 'Confirmed') return 'rgba(75, 192, 75, 1)';
-          if (status === 'Declined') return 'rgba(255, 99, 132, 1)';
-          if (status === 'Booked - Waiting Confirmation') return 'rgba(255, 205, 86, 1)';
+          if (status === 'Confirmed - KYC Completed with User') return 'rgba(75, 192, 75, 0.6)'; // green
+          if (status === 'Declined - Discussed with User') return 'rgba(255, 99, 132, 1)'; // red
+          if (status === 'Booked - Waiting Confirmation') return 'rgba(255, 205, 86, 1)'; // yellow
           return 'rgba(75, 192, 192, 1)';
         }),
         borderWidth: 1,
@@ -220,7 +220,15 @@ const Charts = () => {
                   ticks: {
                     callback: function (value, index, values) {
                       const label = this.getLabelForValue(value);
-                      return label === 'Booked - Waiting Confirmation' ? 'Waiting' : label; // Custom label for 'Booked - Waiting Confirmation'
+                      if (label === 'Booked - Waiting Confirmation') {
+                        return 'Waiting'; // Custom label for 'Booked - Waiting Confirmation'
+                      }
+                      if (label === 'Confirmed - KYC Completed with User') {
+                        return 'Confirmed'; // Custom label for 'Confirmed - KYC Completed with User'
+                      }
+                      if (label === 'Declined - Discussed with User') {
+                        return 'Cancelled'; // Custom label for 'Declined - Discussed with User'
+                      }
                     }
                   }
                 },
@@ -228,6 +236,7 @@ const Charts = () => {
                   beginAtZero: true // Start y-axis from zero
                 }
               }
+
             }}
           />
         </Paper>

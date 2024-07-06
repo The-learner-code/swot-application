@@ -1,5 +1,19 @@
+.table-container .MuiDataGrid-cell {
+    display: flex;
+    align-items: center;
+}
+
+.table-container .MuiDataGrid-cell div {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.2;
+    /* Reduced line height */
+    padding: 4px 0;
+    /* Adjust padding to fine-tune spacing */
+}
+
 .table-container {
-    padding: 20px;
+    padding: 15px;
     background: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;

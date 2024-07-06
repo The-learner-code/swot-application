@@ -49,9 +49,9 @@ const LoginForm = () => {
             toast.success("User logged in successfully");
             setTimeout(() => {
                 if (email === "vrmsrentalease@gmail.com") {
-                    navigate('/ListOfUser');
+                    navigate('/ListOfUserPage');
                 } else {
-                    navigate('/Features');
+                    navigate('/FeaturesPage');
                 }
             }, 2000);
             resetForm();

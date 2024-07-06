@@ -1,57 +1,59 @@
-import { useNavigate } from 'react-router-dom';
-import { auth } from "../../firebase";
-import './sidebar.css';
-import { signOut } from "firebase/auth";
-import { toast, toastContainer } from '../../toast';
-import 'react-toastify/dist/ReactToastify.css';
-import GarageIcon from '@mui/icons-material/Garage';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+// Import necessary modules and components
+import { useNavigate } from 'react-router-dom'; // Hook for navigation
+import { auth } from "../../firebase"; // Firebase authentication
+import './sidebar.css'; // Sidebar CSS for styling
+import { signOut } from "firebase/auth"; // Firebase sign out function
+import { toast, toastContainer } from '../../toast'; // Custom toast notifications
+import 'react-toastify/dist/ReactToastify.css'; // CSS for toast notifications
+import GarageIcon from '@mui/icons-material/Garage'; // Icon for viewing vehicles
+import VisibilityIcon from '@mui/icons-material/Visibility'; // Icon for viewing bookings
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'; // Icon for logout
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Icon for navigating back to suite
 
 const Book_Sidebar = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Initialize navigation hook
 
+    // Function to handle user logout
     const handleLogout = async () => {
         try {
-            await signOut(auth);
-            toast.success("Logged out successfully!");
+            await signOut(auth); // Sign out user using Firebase authentication
+            toast.success("Logged out successfully!"); // Show success message
             setTimeout(() => {
-                navigate('/Login');
+                navigate('/LoginPage'); // Redirect to login page after 2 seconds
             }, 2000);
         } catch (error) {
-            console.error("Error logging out: ", error);
-            toast.error("Error logging out. Please try again.");
+            console.error("Error logging out: ", error); // Log any error to console
+            toast.error("Error logging out. Please try again."); // Show error message
         }
     };
 
     return (
         <div className="sidebar">
-           {toastContainer}
+            {toastContainer} {/* Container for toast notifications */}
             <div className="top">
-                <span className="logo">Rent Ease</span>
+                <span className="logo">Rent Ease</span> {/* Application logo */}
             </div>
             <hr />
             <div className="center">
                 <ul>
-                    <li onClick={() => navigate('/ViewVehicle')}>
-                        <GarageIcon className='icon' />
+                    <li onClick={() => navigate('/ViewVehicle')}> {/* Navigate to view vehicles */}
+                        <GarageIcon className='icon' /> {/* Icon for viewing vehicles */}
                         <span>View Vehicle</span>
                     </li>
-                    <li onClick={() => navigate('/ViewBooking')}>
-                        <VisibilityIcon className='icon' />
+                    <li onClick={() => navigate('/ViewBooking')}> {/* Navigate to view bookings */}
+                        <VisibilityIcon className='icon' /> {/* Icon for viewing bookings */}
                         <span>View Booking</span>
                     </li>
-                    <li onClick={() => navigate('/Features')}>
-                        <ArrowBackIcon className='icon' />
+                    <li onClick={() => navigate('/Features')}> {/* Navigate back to suite */}
+                        <ArrowBackIcon className='icon' /> {/* Icon for navigating back to suite */}
                         <span>Back to Suite</span>
                     </li>
                 </ul>
             </div>
             <div className="bottom">
                 <ul>
-                    <li onClick={handleLogout}>
-                        <ExitToAppIcon className='icon' />
+                    <li onClick={handleLogout}> {/* Trigger logout function */}
+                        <ExitToAppIcon className='icon' /> {/* Icon for logout */}
                         <span>Logout</span>
                     </li>
                 </ul>
