@@ -36,15 +36,15 @@ const Book_Sidebar = () => {
             <hr />
             <div className="center">
                 <ul>
-                    <li onClick={() => navigate('/ViewVehicle')}> {/* Navigate to view vehicles */}
+                    <li onClick={() => navigate('/ViewBookingPage')}> {/* Navigate to view vehicles */}
                         <GarageIcon className='icon' /> {/* Icon for viewing vehicles */}
                         <span>View Vehicle</span>
                     </li>
-                    <li onClick={() => navigate('/ViewBooking')}> {/* Navigate to view bookings */}
+                    <li onClick={() => navigate('/BookingLogPage')}> {/* Navigate to view bookings */}
                         <VisibilityIcon className='icon' /> {/* Icon for viewing bookings */}
-                        <span>View Booking</span>
+                        <span>Booking log</span>
                     </li>
-                    <li onClick={() => navigate('/Features')}> {/* Navigate back to suite */}
+                    <li onClick={() => navigate('/FeaturesPage')}> {/* Navigate back to suite */}
                         <ArrowBackIcon className='icon' /> {/* Icon for navigating back to suite */}
                         <span>Back to Suite</span>
                     </li>

@@ -73,7 +73,7 @@ const Features = () => {
                         <h2>Add vehicle for rental</h2>
                         <p>Refresh your details in a snap!</p>
                     </div>
-                    <div className="features" onClick={() => navigate('/ViewVehicle')}> {/* Navigate to view vehicle page */}
+                    <div className="features" onClick={() => navigate('/ViewVehicleBookingPage')}> {/* Navigate to view vehicle page */}
                         <EditIcon className="fa-icon" /> {/* Icon for viewing vehicle */}
                         <h2>Move for Booking</h2>
                         <p>See your profile, anytime, anywhere.</p>

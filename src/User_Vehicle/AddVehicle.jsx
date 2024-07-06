@@ -1,15 +1,18 @@
+// Import necessary dependencies and components
 import React, { useState, useEffect } from 'react';
-import { auth, db, storage } from '../firebase';
-import { doc, setDoc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import '../styles/User_Vehicle.css';
-import Sidebar from '../component/sidebar/Owner_Sidebar';
-import Navbar from '../component/header/Navbar';
-import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
-import { toast, toastContainer } from '../toast';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { auth, db, storage } from '../firebase'; // Firebase authentication, Firestore database, and storage
+import { doc, setDoc, updateDoc } from 'firebase/firestore'; // Firestore functions for document operations
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'; // Firebase storage functions for file operations
+import '../styles/User_Vehicle.css'; // Custom CSS for styling
+import Sidebar from '../component/sidebar/Owner_Sidebar'; // Sidebar component
+import Navbar from '../component/header/Navbar'; // Navbar component
+import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined'; // Upload icon
+import { toast, toastContainer } from '../toast'; // Toast notification library
+import { useNavigate, useLocation } from 'react-router-dom'; // Hooks for navigation and location
 
+// Functional component for adding or updating vehicle details
 const AddVehicle = () => {
+  // State variables for vehicle details and files
   const [vehicleModel, setVehicleModel] = useState('');
   const [vehicleType, setVehicleType] = useState('');
   const [vehicleNumber, setVehicleNumber] = useState('');
@@ -23,6 +26,7 @@ const AddVehicle = () => {
   const location = useLocation();
   const vehicleData = location.state?.vehicle; // Get vehicle data from location state
 
+  // Fetch current user details on component mount
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
@@ -31,6 +35,7 @@ const AddVehicle = () => {
     return () => unsubscribe();
   }, []);
 
+  // If vehicle data is available, pre-fill the form fields
   useEffect(() => {
     if (vehicleData) {
       setVehicleModel(vehicleData.vehicleModel);
@@ -42,6 +47,7 @@ const AddVehicle = () => {
     }
   }, [vehicleData]);
 
+  // Function to handle image file upload
   const handleImageUpload = async () => {
     if (!imageFile) return vehicleData?.imageUrl || null; // Return existing image URL if no new image is selected
     const storageRef = ref(storage, `user_car_photo/${currentUser.uid}/${imageFile.name}`);
@@ -50,6 +56,7 @@ const AddVehicle = () => {
     return downloadURL;
   };
 
+  // Function to handle document file upload
   const handleDocUpload = async () => {
     if (!pdfFile) return vehicleData?.pdfUrl || null; // Return existing document URL if no new document is selected
     const storageRef = ref(storage, `user_documents/${currentUser.uid}/${pdfFile.name}`);
@@ -58,6 +65,7 @@ const AddVehicle = () => {
     return downloadURL;
   };
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -108,6 +116,7 @@ const AddVehicle = () => {
       setImageFile(null);
       setPdfFile(null);
 
+      // Update user type in AuthDetails
       await updateDoc(doc(db, 'AuthDetails', email), {
         type: "Vehicle_Owner",
       });
@@ -128,9 +137,9 @@ const AddVehicle = () => {
   return (
     <div className='UserProfile'>
       {toastContainer}
-      <Sidebar />
+      <Sidebar /> {/* Sidebar component */}
       <div className="UserProfilecontainer">
-        <Navbar />
+        <Navbar /> {/* Navbar component */}
         <div className="form-container">
           <form autoComplete='off' onSubmit={handleSubmit}>
             <div className="form-group">
@@ -177,4 +186,5 @@ const AddVehicle = () => {
   );
 }
 
+// Export the component as default
 export default AddVehicle;

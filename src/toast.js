@@ -1,4 +1,3 @@
-// toastService.js
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -6,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const toastContainer = (
   <ToastContainer 
     position="top-center" 
-    autoClose={2000} 
+    autoClose={2500} 
     hideProgressBar={false} 
     newestOnTop={false} 
     closeOnClick 
@@ -19,6 +18,3 @@ const toastContainer = (
 
 // Export toast and toastContainer for use in other components
 export { toast, toastContainer };
-
-
-//import { toast, toastContainer } from '../toastservice';

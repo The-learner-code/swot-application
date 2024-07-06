@@ -1,6 +1,7 @@
 // Importing necessary modules from React and React Router
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast, toastContainer } from '../toast';
 
 // Importing icons from Material UI
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -14,15 +15,28 @@ import '../styles/Contact.css';
 const ContactUsForm = () => {
     // Using useNavigate hook to programmatically navigate to different routes
     const navigate = useNavigate();
-    
-    // Defining a state variable to store the result of form submission
+
+    // Defining state variables to store the form submission result and errors
     const [result, setResult] = React.useState("");
 
     // Function to handle form submission
     const onSubmit = async (event) => {
         event.preventDefault();
-        setResult("Sending....");
+        setResult("");
+
+        // Collecting form data
         const formData = new FormData(event.target);
+        const userName = formData.get('user_name').trim();
+        const userPhoneNo = formData.get('user_phone_no').trim();
+        const userMessage = formData.get('user_message').trim();
+
+        // Validating form data
+        if (!userName || !userPhoneNo || !userMessage) {
+            toast.error("Please fill out all fields");
+            return;
+        }
+
+        setResult("Sending....");
 
         // Adding access key to the form data
         formData.append("access_key", "add web 3 forms api key");
@@ -47,6 +61,8 @@ const ContactUsForm = () => {
 
     return (
         <div className="cbody">
+            {/* Toast container for displaying error messages */}
+            {toastContainer}
             {/* Button to navigate back to the Home page */}
             <div className="c-back">
                 <button onClick={() => navigate('/')} className="c-button-back">Back to Home</button>

@@ -67,11 +67,12 @@ const ListOfVehicleTable = () => {
   const columns = [
     { field: 'email', headerName: 'Email Id', width: 180, headerClassName: 'table-header' },
     { field: 'vehicleType', headerName: 'Vehicle Type', width: 120, headerClassName: 'table-header' },
+    { field: 'vehicleModel', headerName: 'Vehicle Model', width: 120, headerClassName: 'table-header'},
     { field: 'vehicleNumber', headerName: 'Vehicle Number', width: 150, headerClassName: 'table-header' },
     { field: 'seatingSize', headerName: 'Seating Size', width: 120, headerClassName: 'table-header' },
     { field: 'availableFrom', headerName: 'Available From', width: 140, headerClassName: 'table-header' },
     { field: 'availableTo', headerName: 'Available To', width: 110, headerClassName: 'table-header' },
-    { field: 'status', headerName: 'Status', width: 80, headerClassName: 'table-header' },
+    { field: 'status', headerName: 'Status', width: 200, headerClassName: 'table-header' },
     {
       field: 'imageUrl',
       headerName: 'Photo',

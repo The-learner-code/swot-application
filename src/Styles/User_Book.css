@@ -1,4 +1,71 @@
-/* Styles for the BookingDetails page */
+/* Styles for the Bookinglog page */
+.tableclass {
+  display: flex;
+  width: 100%;
+}
+
+.tableclasscontainer {
+  flex: 6;
+}
+
+.table {
+  padding: 5px;
+  margin: 5px;
+  width: 1240px;
+}
+
+/* Styles for the View Vehicle Booking page */
+
+.ViewVehicle {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.ViewVehiclecontainer {
+  flex: 6;
+}
+
+.Block {
+  margin: 10px;
+}
+
+.vehicle-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.vehicle-block:hover {
+  background-color: rgba(60, 0, 160, 0.4);
+}
+
+.vehicle-block {
+  width: calc(33.33% - 10px);
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-block img {
+  width: 385px;
+  height: 200px;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.vvbp {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+/* Styles for the BookingValidation page */
 .booking-page {
   display: flex;
   justify-content: center;
@@ -39,8 +106,9 @@
 }
 
 .booking-container input {
+  width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
