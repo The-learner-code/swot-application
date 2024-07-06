@@ -1,13 +1,17 @@
+// Importing necessary modules from React, React Router, and Firebase
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../firebase'; // Import auth and db instances from firebase configuration
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Import createUserWithEmailAndPassword function from Firebase Authentication
-import { setDoc, doc } from "firebase/firestore"; // Import setDoc and doc functions from Firebase Firestore
-import { toast, toastContainer } from '../toast';
-import '../styles/Register.css';
+import { auth, db } from '../firebase';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { setDoc, doc } from "firebase/firestore";
+import { toast, toastContainer } from '../toast'; // Import toast functions and toastContainer
+import '../styles/Register.css'; // Importing the CSS file for styling the Register component
 
+// Defining the RegisterForm functional component
 const RegisterForm = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Using useNavigate hook to programmatically navigate to different routes
+
+    // Defining state variables for form inputs and password visibility
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
     const [address, setAddress] = useState("");
@@ -16,10 +20,12 @@ const RegisterForm = () => {
     const [conpass, setConpass] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
+    // Function to toggle password visibility
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    // Function to reset the form fields
     const resetForm = () => {
         setEmail("");
         setFullName("");
@@ -29,6 +35,7 @@ const RegisterForm = () => {
         setConpass("");
     };
 
+    // Function to validate email format
     const validateEmail = (email) => {
         const re = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         return re.test(String(email).toLowerCase());
@@ -42,6 +49,7 @@ const RegisterForm = () => {
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
+
         // Validate form inputs and show error messages if invalid
         if (!validateEmail(email.trim()) || email.trim() === "" || email.trim() === " ") {
             toast.error("Please enter a valid Email_id ending with @gmail.com...!");
@@ -106,36 +114,45 @@ const RegisterForm = () => {
     return (
         <div className='r-body'>
             {toastContainer}
+            {/* Button to navigate back to the Home page */}
             <div className="r-back">
                 <button onClick={() => navigate('/')} className="l-button-back">Back to Home</button>
             </div>
+            {/* Main container for the registration form */}
             <div className="r-wrapper">
                 <form className='r-form' onSubmit={handleSubmit} autoComplete="off">
                     <h2 className='r-h2'>Register Here..!</h2>
+                    {/* Full Name input field */}
                     <div className="r-input-field">
-                        <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)}required />
+                        <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
                         <label>Enter your name</label>
                     </div>
+                    {/* Email input field */}
                     <div className="r-input-field">
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                         <label>Enter your email</label>
                     </div>
+                    {/* Address input field */}
                     <div className="r-input-field">
                         <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
                         <label>Enter your full address and pincode</label>
                     </div>
+                    {/* Phone number input field */}
                     <div className="r-input-field">
                         <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
                         <label>Enter your phone no</label>
                     </div>
+                    {/* Password input field */}
                     <div className="r-input-field">
                         <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} required />
                         <label>Enter your password</label>
                     </div>
+                    {/* Confirm password input field */}
                     <div className="r-input-field">
                         <input type={showPassword ? "text" : "password"} value={conpass} onChange={(e) => setConpass(e.target.value)} required />
-                        <label>Conform your password</label>
+                        <label>Confirm your password</label>
                     </div>
+                    {/* Section for password visibility toggle */}
                     <div className="forget">
                         <label htmlFor="showPassword">
                             <input
@@ -147,9 +164,11 @@ const RegisterForm = () => {
                             <p>Show password</p>
                         </label>
                     </div>
+                    {/* Register button */}
                     <button type="submit" className='l-button'>Register</button>
+                    {/* Link to navigate to the Login page */}
                     <div className="login">
-                        <p onClick={() => navigate('/LoginPage')}>Already Registered.? click Here...!</p>
+                        <p onClick={() => navigate('/LoginPage')}>Already Registered? Click Here...!</p>
                     </div>
                 </form>
             </div>
@@ -157,4 +176,5 @@ const RegisterForm = () => {
     );
 }
 
+// Exporting the RegisterForm component to be used in other parts of the application
 export default RegisterForm;

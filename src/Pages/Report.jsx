@@ -1,7 +1,7 @@
 import React from 'react';
-import '../Styles/report.css';
-import Sidebar from '../Components/Sidebar/Admin_Sidebar';
-import Navbar from '../Components/Header/Navbar';
+import '../styles/report.css';
+import Sidebar from '../component/sidebar/Admin_Sidebar';
+import Navbar from '../component/header/Navbar';
 import Charts from '../Reports/Charts';
 
 const RequestCompletion = () => {

@@ -3,6 +3,7 @@ import LandingPage from './pages/Homepage';
 import ContactPage from './pages/Contact';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
+import ReportPage from './pages/Report';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path='/ContactPage' element={<ContactPage />} />
         <Route path='/LoginPage' element={<LoginPage />} />
         <Route path='/RegisterPage' element={<RegisterPage />} />
+        <Route path='/ReportPage' element={<ReportPage />} />
       </Routes>
     </BrowserRouter>
   );
