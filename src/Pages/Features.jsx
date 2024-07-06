@@ -68,7 +68,7 @@ const Features = () => {
             <div className='feat-container'>
                 <h1>Solution Suite</h1>
                 <div className="row">
-                    <div className="features" onClick={() => navigate('/UpdateVehicle')}> {/* Navigate to add vehicle page */}
+                    <div className="features" onClick={() => navigate('/AddVehiclePage')}> {/* Navigate to add vehicle page */}
                         <PersonIcon className="fa-icon" /> {/* Icon for adding vehicle */}
                         <h2>Add vehicle for rental</h2>
                         <p>Refresh your details in a snap!</p>

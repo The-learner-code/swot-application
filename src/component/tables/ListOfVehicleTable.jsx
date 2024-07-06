@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 // Import necessary React hooks
-import { collection, getDocs, query, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, query, deleteDoc, doc, updateDoc } from "firebase/firestore";
 // Import Firestore functions for data fetching and document deletion
 import { db } from "../../firebase";
 // Import the Firestore database configuration
@@ -49,6 +49,20 @@ const ListOfVehicleTable = () => {
     }
   };
 
+  // Function to handle the verification of a document(vehicle)
+  const handleVerify = async (id) => {
+    try {
+      const vehicleDocRef = doc(db, "VehicleDetails", id);
+      await updateDoc(vehicleDocRef, { status: 'Available' });
+      const q = query(collection(db, "VehicleDetails"));
+      const UserSnapshot = await getDocs(q);
+      const UserList = UserSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setVehicledetail(UserList);
+    } catch (error) {
+      console.error("Error verifying document: ", error);
+    }
+  };
+
   // Define the columns for the DataGrid
   const columns = [
     { field: 'email', headerName: 'Email Id', width: 180, headerClassName: 'table-header' },
@@ -81,20 +95,33 @@ const ListOfVehicleTable = () => {
       ),
     },
     {
-      field: 'remove',
+      field: 'actions',
       headerName: 'Action',
       headerClassName: 'table-header',
-      width: 150,
+      width: 300,  // Adjust the width as needed
       renderCell: (params) => (
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => handleRemove(params.row.id)}
-        >
-          Remove
-        </Button>
+        <div>
+          <Button
+            variant="contained"
+            color="success"
+            style={{
+              marginRight: '8px',
+            }}
+            onClick={() => handleVerify(params.row.id)}
+            disabled={params.row.status === 'Available'}
+          >
+            Verify
+          </Button>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: 'red', color: 'white' }}
+            onClick={() => handleRemove(params.row.id)}
+          >
+            Remove
+          </Button>
+        </div>
       ),
-    },
+    }
   ];
 
   // Render the component

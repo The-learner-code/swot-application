@@ -10,7 +10,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility'; // Icon for viewing
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'; // Icon for logout
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Icon for navigating back to suite
 
-const User_Sidebar = () => {
+const Owner_Sidebar = () => {
     const navigate = useNavigate(); // Initialize navigation hook
 
     // Function to handle user logout
@@ -36,15 +36,15 @@ const User_Sidebar = () => {
             <hr />
             <div className="center">
                 <ul>
-                    <li onClick={() => navigate('/UpdateVehicle')}> {/* Navigate to add vehicle */}
+                    <li onClick={() => navigate('/AddVehiclePage')}> {/* Navigate to add vehicle */}
                         <GarageIcon className='icon' /> {/* Icon for adding vehicles */}
                         <span>Add Vehicle</span>
                     </li>
-                    <li onClick={() => navigate('/VehicleDetails')}> {/* Navigate to vehicle details */}
+                    <li onClick={() => navigate('/ViewVehiclePage')}> {/* Navigate to vehicle details */}
                         <VisibilityIcon className='icon' /> {/* Icon for vehicle details */}
                         <span>Vehicle Details</span>
                     </li>
-                    <li onClick={() => navigate('/Features')}> {/* Navigate back to suite */}
+                    <li onClick={() => navigate('/FeaturesPage')}> {/* Navigate back to suite */}
                         <ArrowBackIcon className='icon' /> {/* Icon for navigating back to suite */}
                         <span>Back to Suite</span>
                     </li>
@@ -62,4 +62,4 @@ const User_Sidebar = () => {
     );
 };
 
-export default User_Sidebar;
+export default Owner_Sidebar;
